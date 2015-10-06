@@ -17,7 +17,7 @@ public class IntBoardTests {
 	} 
 	
 	@Test
-	public void testAdjacency0(){
+	public void testAdjacency0_0(){
 		BoardCell cell = board.getCell(0,0);
 		LinkedList<BoardCell> testList = board.getAdjList(cell);
 		Assert.assertTrue(testList.contains(board.getCell(1, 0)));
@@ -26,7 +26,7 @@ public class IntBoardTests {
 	}
 	
 	@Test
-	public void testAdjacency4(){
+	public void testAdjacency1_0(){
 		BoardCell cell = board.getCell(1, 0);
 		LinkedList<BoardCell> testList = board.getAdjList(cell);
 		Assert.assertTrue(testList.contains(board.getCell(2,0)));
