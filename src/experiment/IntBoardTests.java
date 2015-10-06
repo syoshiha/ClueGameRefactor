@@ -25,13 +25,23 @@ public class IntBoardTests {
 	}
 	
 	@Test
-	public void testAdjacency1(){
-		
+	public void testAdjacency4(){
+		BoardCell cell = board.getCell(1, 0);
+		LinkedList<BoardCell> testList = board.getAdjList(cell);
+		Assert.assertTrue(testList.contains(board.getCell(2,0)));
+		Assert.assertTrue(testList.contains(board.getCell(1, 1)));
+		Assert.assertTrue(testList.contains(board.getCell(0, 0)));
+		Assert.assertEquals(2, testList.size());
 	}
 	
 	@Test
-	public void testAdjacency2(){
-		
+	public void testAdjacency6(){
+		BoardCell cell = board.getCell(1, 2);
+		LinkedList<BoardCell> testList = board.getAdjList(cell);
+		Assert.assertTrue(testList.contains(board.getCell(0,2)));
+		Assert.assertTrue(testList.contains(board.getCell(1, 1)));
+		Assert.assertTrue(testList.contains(board.getCell(0, 0)));
+		Assert.assertEquals(2, testList.size());
 	}
 	
 	@Test
