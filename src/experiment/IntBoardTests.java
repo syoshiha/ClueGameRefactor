@@ -26,6 +26,15 @@ public class IntBoardTests {
 	}
 	
 	@Test
+	public void testAdjacency3_3(){ //bottom right corner
+		BoardCell cell = board.getCell(0,0);
+		LinkedList<BoardCell> testList = board.getAdjList(cell);
+		Assert.assertTrue(testList.contains(board.getCell(2, 3)));
+		Assert.assertTrue(testList.contains(board.getCell(3, 2)));
+		Assert.assertEquals(2, testList.size());
+	}
+	
+	@Test
 	public void testAdjacency1_0(){ //left edge
 		BoardCell cell = board.getCell(1, 0);
 		LinkedList<BoardCell> testList = board.getAdjList(cell);
@@ -68,7 +77,6 @@ public class IntBoardTests {
 		Assert.assertEquals(2, testList.size());
 	}
 	
-	
 	@Test
 	public void testTargets0_3(){
 		BoardCell cell = board.getCell(0, 0);
@@ -108,5 +116,33 @@ public class IntBoardTests {
 		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 3)));
+	}
+	
+	@Test
+	public void testTargets9_5(){ //cell 9 5 steps
+		BoardCell cell = board.getCell(2, 1);
+		board.calcTargets(cell, 5);
+		Set<BoardCell> targets = board.getTargets(cell);
+		Assert.assertEquals(3, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(0, 0))); //cell 0
+		Assert.assertTrue(targets.contains(board.getCell(0, 2))); //cell 2
+		Assert.assertTrue(targets.contains(board.getCell(1, 1))); //cell 5
+		Assert.assertTrue(targets.contains(board.getCell(1, 3))); //cell 7 
+		Assert.assertTrue(targets.contains(board.getCell(2, 0))); //cell 8
+		Assert.assertTrue(targets.contains(board.getCell(2, 2))); //cell 10
+		Assert.assertTrue(targets.contains(board.getCell(3, 3))); //cell 15
+	}
+	
+	@Test
+	public void testTargets7_3(){ //cell 7 3 steps
+		BoardCell cell = board.getCell(1, 3);
+		board.calcTargets(cell, 3);
+		Set<BoardCell> targets = board.getTargets(cell);
+		Assert.assertEquals(3, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(0, 1))); //cell 1
+		Assert.assertTrue(targets.contains(board.getCell(1, 0))); //cell 4
+		Assert.assertTrue(targets.contains(board.getCell(1, 2))); //cell 6
+		Assert.assertTrue(targets.contains(board.getCell(2, 1))); //cell 9 
+		Assert.assertTrue(targets.contains(board.getCell(3, 2))); //cell 14
 	}
 }
