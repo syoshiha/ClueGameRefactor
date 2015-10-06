@@ -29,22 +29,44 @@ public class IntBoardTests {
 	public void testAdjacency1_0(){ //left edge
 		BoardCell cell = board.getCell(1, 0);
 		LinkedList<BoardCell> testList = board.getAdjList(cell);
-		Assert.assertTrue(testList.contains(board.getCell(2,0)));
+		Assert.assertTrue(testList.contains(board.getCell(2, 0)));
 		Assert.assertTrue(testList.contains(board.getCell(1, 1)));
 		Assert.assertTrue(testList.contains(board.getCell(0, 0)));
 		Assert.assertEquals(2, testList.size());
 	}
 	
 	@Test
-	public void testAdjacency1_2changeme(){ //second from last middle of grid
+	public void testAdjacency1_2changeme(){ //second from last column middle of grid
 		BoardCell cell = board.getCell(1, 2);
 		LinkedList<BoardCell> testList = board.getAdjList(cell);
-		Assert.assertTrue(testList.contains(board.getCell(0,2)));  //cell 2
+		Assert.assertTrue(testList.contains(board.getCell(0, 2)));  //cell 2
 		Assert.assertTrue(testList.contains(board.getCell(1, 1))); //cell 5
 		Assert.assertTrue(testList.contains(board.getCell(2, 2))); //cell 10
 		Assert.assertTrue(testList.contains(board.getCell(1, 3))); //cell 7
 		Assert.assertEquals(2, testList.size());
 	}
+	
+	@Test
+	public void testAdjacency2_1(){ //second column middle of grid
+		BoardCell cell = board.getCell(2, 1);
+		LinkedList<BoardCell> testList = board.getAdjList(cell);
+		Assert.assertTrue(testList.contains(board.getCell(3, 1)));  //cell 13
+		Assert.assertTrue(testList.contains(board.getCell(2, 2))); //cell 10
+		Assert.assertTrue(testList.contains(board.getCell(1, 1))); //cell 5
+		Assert.assertTrue(testList.contains(board.getCell(2, 0))); //cell 8
+		Assert.assertEquals(2, testList.size());
+	}
+	
+	@Test
+	public void testAdjacency2_3(){ //right edge
+		BoardCell cell = board.getCell(2, 3);
+		LinkedList<BoardCell> testList = board.getAdjList(cell);
+		Assert.assertTrue(testList.contains(board.getCell(3, 3))); //cell 15
+		Assert.assertTrue(testList.contains(board.getCell(1, 3))); //cell 7
+		Assert.assertTrue(testList.contains(board.getCell(2, 2))); //cell 10
+		Assert.assertEquals(2, testList.size());
+	}
+	
 	
 	@Test
 	public void testTargets0_3(){
@@ -61,14 +83,18 @@ public class IntBoardTests {
 	}
 
 	@Test
-	public void testTargets1_3(){
+	public void testTargets1_3(){ //cell 1 3 steps
 		BoardCell cell = board.getCell(1, 3);
-		board.calcTargets(cell, 2);
+		board.calcTargets(cell, 3);
 		Set<BoardCell> targets = board.getTargets(cell);
 		Assert.assertEquals(3, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(2, 3)));
+		Assert.assertTrue(targets.contains(board.getCell(0, 0))); //cell 0
+		Assert.assertTrue(targets.contains(board.getCell(0, 2))); //cell 2
+		Assert.assertTrue(targets.contains(board.getCell(1, 1))); //cell 5
+		Assert.assertTrue(targets.contains(board.getCell(1, 3))); //cell 7 
+		Assert.assertTrue(targets.contains(board.getCell(2, 0))); //cell 8
+		Assert.assertTrue(targets.contains(board.getCell(2, 2))); //cell 10
+		Assert.assertTrue(targets.contains(board.getCell(3, 1))); //cell 13
 	}
 	
 	@Test
