@@ -36,7 +36,8 @@ public class IntBoardTests {
 	}
 	
 	@Test
-	public void testAdjacency1_2changeme(){ //second from last column middle of grid
+	public void testAdjacency1_2(){ //second from last middle of grid
+
 		BoardCell cell = board.getCell(1, 2);
 		LinkedList<BoardCell> testList = board.getAdjList(cell);
 		Assert.assertTrue(testList.contains(board.getCell(0, 2)));  //cell 2
@@ -98,7 +99,14 @@ public class IntBoardTests {
 	}
 	
 	@Test
-	public void testTargets1_4() {
-		
+	public void testTargets2_2() { // cell 2, 2 steps
+		BoardCell cell = board.getCell(0, 2);
+		board.calcTargets(cell, 2);
+		Set<BoardCell> targets = board.getTargets(cell);
+		Assert.assertEquals(4, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(0, 0)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 3)));
 	}
 }
