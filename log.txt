@@ -1,0 +1,117 @@
+commit fee975a6f332b5c2abe9f6a66f671d227a85ac96
+Merge: 61520bc 5043c5e
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:58:00 2015 -0600
+
+    failure testing complete-again
+
+commit 61520bc27f1ccfe809e9efa9a9043a4225d8d641
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:56:27 2015 -0600
+
+    failing tests complete
+
+commit 5043c5e5fe21eacfc655b7821d0d38d6f4b09c02
+Author: Jason Ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 6 15:54:05 2015 -0600
+
+    testTargets15_4() function
+
+commit bc4756e4b22a64bbaa45a3aefdfd8b613dfe33cc
+Merge: 060f961 236d9b3
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:45:38 2015 -0600
+
+    testing updated
+
+commit 060f9615970990e24a6d2268039b53d4ea481b31
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:44:24 2015 -0600
+
+    testTargets1_3 written
+
+commit 236d9b3411eb8bc375e8be55c7a79dcd001566da
+Author: Jason Ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 6 15:43:06 2015 -0600
+
+    testTargets2_2 function
+
+commit 45f05a141a270e53a1aae1889075c703f17083aa
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:32:01 2015 -0600
+
+    adj tests again
+
+commit 5ff96b2a5f88cd1090888af2eb1ce3a7744ae179
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:29:19 2015 -0600
+
+    updated adjancey tests
+
+commit ca89f1936698210a150c2299166a18e85cd0c839
+Merge: ae028b1 6420604
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:24:27 2015 -0600
+
+    Merge branch 'master' of https://github.com/HelluvaEnginerd/ClueGameExp
+
+commit ae028b1749ceb20185930f70a115b72a11e49f30
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:24:17 2015 -0600
+
+    adjacency tests written
+
+commit 64206043c44b3b49f1c27f1b16b180caf1709698
+Author: Jason Ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 6 15:20:19 2015 -0600
+
+    Added testTargets0_3
+
+commit 9202dadc6d8cc79a40eb64ef1508f246d0674368
+Merge: a5fa6ac 52aed15
+Author: Jason Ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 6 15:15:43 2015 -0600
+
+    Testing merge
+
+commit a5fa6ace3bc9508b3787874dcbb15606d0c98b04
+Author: Jason Ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 6 15:15:36 2015 -0600
+
+    test
+
+commit 52aed15285d64205602972793172861c1b43c99d
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:14:55 2015 -0600
+
+    2 failure tests done
+
+commit 526fb928d8e6948bf7acb218da813aef41332b7c
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:10:26 2015 -0600
+
+    fail testing updates
+
+commit 275cb8827aa91d6aa27012df1e64b4b380509bb4
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 14:52:14 2015 -0600
+
+    fail tests half written
+
+commit 467e6dd4b8bc6354287acbd2b7fd74542ae78b9a
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 14:44:30 2015 -0600
+
+    README actually there now
+
+commit 6c2d12b15a2290731ef7d1033a8231729ee017c1
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 14:42:52 2015 -0600
+
+    setting up failing tests
+
+commit 6a6a5a1aff6af22b27c4ac76ef6c887e2b047660
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 12:19:13 2015 -0600
+
+    Initial commit
