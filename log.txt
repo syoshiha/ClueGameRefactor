@@ -1,3 +1,15 @@
+commit 6ab51524a236cbd5ff40d9ee1f055fb948dded55
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 16:01:05 2015 -0600
+
+    README updated
+
+commit 6d57566b02e106a559f31cba582f475112ee880a
+Author: Hayden Scott <hascott@mymail.mines.edu>
+Date:   Tue Oct 6 15:59:50 2015 -0600
+
+    log file added
+
 commit fee975a6f332b5c2abe9f6a66f671d227a85ac96
 Merge: 61520bc 5043c5e
 Author: Hayden Scott <hascott@mymail.mines.edu>
