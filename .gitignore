@@ -4,3 +4,5 @@
 .metadata
 .project
 .bin/
+/bin/
+/bin/
