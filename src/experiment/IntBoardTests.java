@@ -145,4 +145,19 @@ public class IntBoardTests {
 		Assert.assertTrue(targets.contains(board.getCell(2, 1))); //cell 9 
 		Assert.assertTrue(targets.contains(board.getCell(3, 2))); //cell 14
 	}
+
+	@Test
+	public void testTargets15_4() { // cell 15, 4 steps
+		BoardCell cell = board.getCell(3, 3);
+		board.calcTargets(cell, 4);
+		Set<BoardCell> targets = board.getTargets(cell);
+		Assert.assertEquals(6, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(2, 0)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(0, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(3, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 3)));
+	}	
+
 }
