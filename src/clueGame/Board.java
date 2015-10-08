@@ -17,6 +17,18 @@ public class Board {
 	
 	
 	
+	public Board() { //default constructor
+		super();
+		this.boardConfigFile = "Layout.csv";
+		this.roomConfigFile = "Legend.txt";
+	}
+
+	public Board(String boardConfigFile, String roomConfigFile) { //constructor with board and room files passed in for testing with other files
+		super();
+		this.boardConfigFile = boardConfigFile;
+		this.roomConfigFile = roomConfigFile;
+	}
+
 	public void initialize(){
 		
 	}
@@ -38,6 +50,11 @@ public class Board {
 	}
 	
 	public BoardCell getCellAt(int row, int column){
+		return null;
+	}
+
+	public LinkedList<BoardCell> getAdjList(int i, int j) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
