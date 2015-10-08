@@ -24,9 +24,22 @@ public class IntBoard {
 	}
 	
 	public void calcAdjacencies(){
+		LinkedList<BoardCell> neighbors = new LinkedList<BoardCell>();
 		for(int i = 0; i < TOTAL_X; i++) {
 			for(int j = 0; j < TOTAL_Y; j++) {
-				// stuff here
+				if(i > 0) {
+					neighbors.add(grid[i - 1][j]);
+				}
+				if(i < TOTAL_X - 1) {
+					neighbors.add(grid[i + 1][j]);
+				}
+				if(j > 0) {
+					neighbors.add(grid[i][j - 1]);
+				}
+				if(j < TOTAL_Y - 1) {
+					neighbors.add(grid[i][j + 1]);
+				}
+				adjacentMatrix.put(grid[i][j], neighbors);
 			}
 		}
 	}
@@ -54,7 +67,7 @@ public class IntBoard {
 	}
 
 	public Set<BoardCell> getTargets(BoardCell cell) {
-		return null;
+		return targets;
 	}
 	
 }
