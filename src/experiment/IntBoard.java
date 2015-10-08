@@ -1,6 +1,7 @@
 package experiment;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +18,9 @@ public class IntBoard {
 	public IntBoard() {
 		super();
 		adjacentMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
+		visited = new HashSet<BoardCell>();
+		targets = new HashSet<BoardCell>(); //hash sets cause why not?
+		grid = new BoardCell[TOTAL_X][TOTAL_Y];
 	}
 	
 	public void calcAdjacencies(){
@@ -28,10 +32,15 @@ public class IntBoard {
 	}
 	
 	public void calcTargets(BoardCell startCell, int pathLength){
-		
+		visited.clear(); //clear the visited set
+		targets.clear(); //clear the targets set
+		visited.add(startCell);
+		targets = findAllTargets(startCell, pathLength);
 	}
 	
-	public Set<BoardCell> getTargets(BoardCell cell){
+	public Set<BoardCell> findAllTargets(BoardCell currentCell, int remainingSteps){
+		visited.add(currentCell);
+		LinkedList adj = new LinkedList(adjacentMatrix.get(currentCell));	//new linked list 
 		return null;
 	}
 	
@@ -41,6 +50,10 @@ public class IntBoard {
 
 	public BoardCell getCell(int i, int j) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Set<BoardCell> getTargets(BoardCell cell) {
 		return null;
 	}
 	
