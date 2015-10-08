@@ -21,6 +21,11 @@ public class IntBoard {
 		visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>(); //hash sets cause why not?
 		grid = new BoardCell[TOTAL_X][TOTAL_Y];
+		for(int i = 0; i < TOTAL_X; i++) {
+			for(int j = 0; j < TOTAL_Y; j++) {
+				grid[i][j] = new BoardCell(i, j);
+			}
+		}
 	}
 	
 	public void calcAdjacencies(){
@@ -40,6 +45,10 @@ public class IntBoard {
 					neighbors.add(grid[i][j + 1]);
 				}
 				adjacentMatrix.put(grid[i][j], neighbors);
+				System.out.println("for i=" + i + " j=" + j + ": neighbors: ");
+				for(BoardCell k : neighbors) {
+					System.out.println(k.toString());
+				}
 			}
 		}
 	}
