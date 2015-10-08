@@ -7,14 +7,17 @@ import java.util.Set;
 
 public class IntBoard {
 	Map<BoardCell, LinkedList<BoardCell>> adjacentMatrix;
-
+	
+	private Set<BoardCell> visited;
+	private Set<BoardCell> targets;
+	private BoardCell[][] grid;
 	public IntBoard() {
 		super();
 		adjacentMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
 	}
 	
 	public void calcAdjacencies(){
- 
+		
 	}
 	
 	public void calcTargets(BoardCell startCell, int pathLength){
