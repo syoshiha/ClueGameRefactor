@@ -44,6 +44,31 @@ public class IntBoard {
 		}
 	}
 	
+	public void calcTargets(BoardCell startCell, int pathLength){
+		visited.clear(); //clear the visited set
+		targets.clear(); //clear the targets set
+		visited.add(startCell);
+		targets = findAllTargets(startCell, pathLength);
+	}
+	
+	public Set<BoardCell> findAllTargets(BoardCell currentCell, int remainingSteps){
+		visited.add(currentCell);
+		LinkedList<BoardCell> adj = new LinkedList<BoardCell>(adjacentMatrix.get(currentCell));	//new linked list of cells that have not been visited
+		for (BoardCell i:visited){
+			adj.remove(i);
+		}
+		for (BoardCell i:adj){
+			if(remainingSteps == 1){
+				targets.add(i);
+			}
+			else {
+				findAllTargets(currentCell, remainingSteps-1);
+			}
+			visited.remove(i);
+		}
+		return targets;
+	}
+	
 	public LinkedList<BoardCell> getAdjList(BoardCell cell){
 		return adjacentMatrix.get(cell);
 	}
