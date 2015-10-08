@@ -15,6 +15,8 @@ public class Board {
 	String boardConfigFile;
 	String roomConfigFile;
 	
+	
+	
 	public void initialize(){
 		
 	}
@@ -38,5 +40,7 @@ public class Board {
 	public BoardCell getCellAt(int row, int column){
 		return null;
 	}
+	
+	
 }
 
