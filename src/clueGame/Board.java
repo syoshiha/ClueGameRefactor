@@ -57,6 +57,11 @@ public class Board {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public Set<BoardCell> getTargets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
