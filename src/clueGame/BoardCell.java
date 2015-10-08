@@ -16,4 +16,12 @@ public class BoardCell {
 	public boolean isDoorway() {
 		return false;
 	}
+
+	public DoorDirection getDoorDirection() {
+		return DoorDirection.NONE;
+	}
+
+	public char getInitial() {
+		return initial;
+	}
 }

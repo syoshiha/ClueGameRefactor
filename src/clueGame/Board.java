@@ -17,6 +17,14 @@ public class Board {
 	
 	
 	
+	public Board(String a, String b) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Board() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void initialize(){
 		
 	}
@@ -39,6 +47,31 @@ public class Board {
 	
 	public BoardCell getCellAt(int row, int column){
 		return null;
+	}
+
+	public static Map<Character, String> getRooms() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getNumRows() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getNumColumns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void loadRoomConfig() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void loadBoardConfig() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
