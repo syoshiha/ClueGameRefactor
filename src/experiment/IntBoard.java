@@ -24,9 +24,9 @@ public class IntBoard {
 	}
 	
 	public void calcAdjacencies(){
-		LinkedList<BoardCell> neighbors = new LinkedList<BoardCell>();
 		for(int i = 0; i < TOTAL_X; i++) {
 			for(int j = 0; j < TOTAL_Y; j++) {
+				LinkedList<BoardCell> neighbors = new LinkedList<BoardCell>();
 				if(i > 0) {
 					neighbors.add(grid[i - 1][j]);
 				}
@@ -42,19 +42,6 @@ public class IntBoard {
 				adjacentMatrix.put(grid[i][j], neighbors);
 			}
 		}
-	}
-	
-	public void calcTargets(BoardCell startCell, int pathLength){
-		visited.clear(); //clear the visited set
-		targets.clear(); //clear the targets set
-		visited.add(startCell);
-		targets = findAllTargets(startCell, pathLength);
-	}
-	
-	public Set<BoardCell> findAllTargets(BoardCell currentCell, int remainingSteps){
-		visited.add(currentCell);
-		LinkedList adj = new LinkedList(adjacentMatrix.get(currentCell));	//new linked list 
-		return null;
 	}
 	
 	public LinkedList<BoardCell> getAdjList(BoardCell cell){
