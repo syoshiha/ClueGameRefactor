@@ -71,9 +71,6 @@ public class IntBoard {
 			}
 			visited.remove(i);
 		}
-		System.out.println("current cell: " + currentCell);
-		System.out.println("number of steps left: " + remainingSteps);
-		System.out.println("targets: " + targets);
 		return targets;
 	}
 	
