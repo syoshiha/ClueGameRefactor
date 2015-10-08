@@ -58,15 +58,14 @@ public class IntBoard {
 	}
 	
 	public LinkedList<BoardCell> getAdjList(BoardCell cell){
-		return null;
+		return adjacentMatrix.get(cell);
 	}
 
 	public BoardCell getCell(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+		return grid[i][j];
 	}
 
-	public Set<BoardCell> getTargets(BoardCell cell) {
+	public Set<BoardCell> getTargets() {
 		return targets;
 	}
 	
