@@ -15,14 +15,17 @@ public class Board {
 	String boardConfigFile;
 	String roomConfigFile;
 	
-	
-	
-	public Board(String a, String b) {
-		// TODO Auto-generated constructor stub
+
+	public Board() { //default constructor
+		super();
+		this.boardConfigFile = "Layout.csv";
+		this.roomConfigFile = "Legend.txt";
 	}
 
-	public Board() {
-		// TODO Auto-generated constructor stub
+	public Board(String boardConfigFile, String roomConfigFile) { //constructor with board and room files passed in for testing with other files
+		super();
+		this.boardConfigFile = boardConfigFile;
+		this.roomConfigFile = roomConfigFile;
 	}
 
 	public void initialize(){
@@ -50,6 +53,10 @@ public class Board {
 	}
 
 	public static Map<Character, String> getRooms() {
+		return null;
+	}
+	
+	public LinkedList<BoardCell> getAdjList(int i, int j) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -71,7 +78,10 @@ public class Board {
 
 	public void loadBoardConfig() {
 		// TODO Auto-generated method stub
-		
+	}
+	
+	public Set<BoardCell> getTargets() {
+		return null;
 	}
 	
 	
