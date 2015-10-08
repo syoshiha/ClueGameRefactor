@@ -11,9 +11,11 @@ import org.junit.Test;
 
 public class IntBoardTests {
 	private IntBoard board;
+	
 	@Before
 	public void setupBoard(){
 		board = new IntBoard();
+		board.calcAdjacencies();
 	} 
 	
 	@Test

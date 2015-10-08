@@ -17,21 +17,35 @@ public class IntBoard {
 	public IntBoard() {
 		super();
 		adjacentMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
+		grid = new BoardCell[TOTAL_X][TOTAL_Y];
 	}
 	
 	public void calcAdjacencies(){
+		LinkedList<BoardCell> neighbors = new LinkedList<BoardCell>();
 		for(int i = 0; i < TOTAL_X; i++) {
 			for(int j = 0; j < TOTAL_Y; j++) {
-				// stuff here
+				if(i > 0) {
+					neighbors.add(grid[i - 1][j]);
+				}
+				if(i < TOTAL_X - 1) {
+					neighbors.add(grid[i + 1][j]);
+				}
+				if(j > 0) {
+					neighbors.add(grid[i][j - 1]);
+				}
+				if(j < TOTAL_Y - 1) {
+					neighbors.add(grid[i][j + 1]);
+				}
+				adjacentMatrix.put(grid[i][j], neighbors);
 			}
 		}
 	}
 	
 	public void calcTargets(BoardCell startCell, int pathLength){
-		
+		return;
 	}
 	
-	public Set<BoardCell> getTargets(BoardCell cell){
+	public Set<BoardCell> findAllTargets(BoardCell currentCell, int remainingSteps) {
 		return null;
 	}
 	
@@ -42,6 +56,10 @@ public class IntBoard {
 	public BoardCell getCell(int i, int j) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Set<BoardCell> getTargets(BoardCell cell) {
+		return targets;
 	}
 	
 }
