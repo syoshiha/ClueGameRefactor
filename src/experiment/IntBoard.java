@@ -67,11 +67,12 @@ public class IntBoard {
 				targets.add(i);
 			}
 			else {
-				findAllTargets(currentCell, remainingSteps-1);
+				targets.addAll(findAllTargets(i, remainingSteps-1));
 			}
 			visited.remove(i);
 		}
 		System.out.println("current cell: " + currentCell);
+		System.out.println("number of steps left: " + remainingSteps);
 		System.out.println("targets: " + targets);
 		return targets;
 	}
