@@ -7,6 +7,10 @@ import java.util.Set;
 
 public class IntBoard {
 	private Map<BoardCell, LinkedList<BoardCell>> adjacentMatrix;
+	private Set<BoardCell> visited;
+	private Set<BoardCell> targets;
+	private BoardCell[][] grid;
+	
 	public static final int TOTAL_X = 4;
 	public static final int TOTAL_Y = 4;
 	
