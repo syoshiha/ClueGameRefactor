@@ -45,11 +45,6 @@ public class IntBoard {
 					neighbors.add(grid[i][j + 1]);
 				}
 				adjacentMatrix.put(grid[i][j], neighbors);
-				System.out.println("for i=" + i + " j=" + j + ": neighbors: ");
-				for(BoardCell k : neighbors) {
-					System.out.println(k.toString());
-				}
-				System.out.println("size of list: " + neighbors.size());
 			}
 		}
 	}
