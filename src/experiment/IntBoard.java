@@ -6,15 +6,21 @@ import java.util.Map;
 import java.util.Set;
 
 public class IntBoard {
-	Map<BoardCell, LinkedList<BoardCell>> adjacentMatrix;
-
+	private Map<BoardCell, LinkedList<BoardCell>> adjacentMatrix;
+	public static final int TOTAL_X = 4;
+	public static final int TOTAL_Y = 4;
+	
 	public IntBoard() {
 		super();
 		adjacentMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
 	}
 	
 	public void calcAdjacencies(){
- 
+		for(int i = 0; i < TOTAL_X; i++) {
+			for(int j = 0; j < TOTAL_Y; j++) {
+				// stuff here
+			}
+		}
 	}
 	
 	public void calcTargets(BoardCell startCell, int pathLength){
