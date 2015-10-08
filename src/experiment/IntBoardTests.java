@@ -124,7 +124,6 @@ public class IntBoardTests {
 	public void testTargets9_5(){ //cell 9 5 steps
 		BoardCell cell = board.getCell(2, 1);
 		board.calcTargets(cell, 5);
-		System.out.println("targets: " + board.getTargets());
 		Set<BoardCell> targets = board.getTargets();
 		Assert.assertEquals(8, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(0, 0))); //cell 0
