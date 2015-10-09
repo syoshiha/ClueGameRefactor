@@ -49,6 +49,7 @@ public class IntBoard {
 				for(BoardCell k : neighbors) {
 					System.out.println(k.toString());
 				}
+				System.out.println("size of list: " + neighbors.size());
 			}
 		}
 	}

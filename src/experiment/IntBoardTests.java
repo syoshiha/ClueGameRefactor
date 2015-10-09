@@ -29,7 +29,7 @@ public class IntBoardTests {
 	
 	@Test
 	public void testAdjacency3_3(){ //bottom right corner
-		BoardCell cell = board.getCell(0,0);
+		BoardCell cell = board.getCell(3, 3);
 		LinkedList<BoardCell> testList = board.getAdjList(cell);
 		Assert.assertTrue(testList.contains(board.getCell(2, 3)));
 		Assert.assertTrue(testList.contains(board.getCell(3, 2)));
@@ -43,7 +43,7 @@ public class IntBoardTests {
 		Assert.assertTrue(testList.contains(board.getCell(2, 0)));
 		Assert.assertTrue(testList.contains(board.getCell(1, 1)));
 		Assert.assertTrue(testList.contains(board.getCell(0, 0)));
-		Assert.assertEquals(2, testList.size());
+		Assert.assertEquals(3, testList.size());
 	}
 	
 	@Test
@@ -55,7 +55,7 @@ public class IntBoardTests {
 		Assert.assertTrue(testList.contains(board.getCell(1, 1))); //cell 5
 		Assert.assertTrue(testList.contains(board.getCell(2, 2))); //cell 10
 		Assert.assertTrue(testList.contains(board.getCell(1, 3))); //cell 7
-		Assert.assertEquals(2, testList.size());
+		Assert.assertEquals(4, testList.size());
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ public class IntBoardTests {
 		Assert.assertTrue(testList.contains(board.getCell(2, 2))); //cell 10
 		Assert.assertTrue(testList.contains(board.getCell(1, 1))); //cell 5
 		Assert.assertTrue(testList.contains(board.getCell(2, 0))); //cell 8
-		Assert.assertEquals(2, testList.size());
+		Assert.assertEquals(4, testList.size());
 	}
 	
 	@Test
@@ -76,7 +76,7 @@ public class IntBoardTests {
 		Assert.assertTrue(testList.contains(board.getCell(3, 3))); //cell 15
 		Assert.assertTrue(testList.contains(board.getCell(1, 3))); //cell 7
 		Assert.assertTrue(testList.contains(board.getCell(2, 2))); //cell 10
-		Assert.assertEquals(2, testList.size());
+		Assert.assertEquals(3, testList.size());
 	}
 	
 	@Test
