@@ -1,20 +1,11 @@
 package clueTest;
 
-/*
- * TODO:
- *  Ensure there is the correct # of rooms loaded
- *  Check your work
- *  
- * */
-
 // Doing a static import allows me to write assertEquals rather than
 // Assert.assertEquals
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
-import java.util.Map;
-
-import org.junit.Assert;
+import java.util.ArrayList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -28,10 +19,10 @@ public class FileInitTests {
 	public static final int NUM_ROWS = 21;
 	public static final int NUM_COLUMNS = 25;
 
-	private static final String BAD_ROOM_FILE = null;
-	private static final String BAD_LEGEND_FILE = null;
-	private static final String CORRECT_LEGEND_FILE = null;
-	private static final String CORRECT_ROOM_FILE = null;
+	private static final String BAD_ROOM_FILE = "BadClueLayout.csv";
+	private static final String BAD_LEGEND_FILE = "BadClueLegend.txt";
+	private static final String CORRECT_ROOM_FILE = "ClueLayout.csv";
+	private static final String CORRECT_LEGEND_FILE = "ClueLegend.txt";
 	
 	private static Board board;
 	
@@ -89,9 +80,9 @@ public class FileInitTests {
 	@Test
 	public void testIsDoorwayNegative() {
 		// Testing isDoorway()
-		BoardCell notADoorWay = board.getCellAt(13, 24);
+		BoardCell notADoorWay = board.getCellAt(13, 24);	// Part of a room
 		assertFalse(notADoorWay.isDoorway());
-		notADoorWay = board.getCellAt(12, 6);
+		notADoorWay = board.getCellAt(12, 6);	// Hallway
 		assertFalse(notADoorWay.isDoorway());
 	}
 	
@@ -129,6 +120,24 @@ public class FileInitTests {
 		assertEquals(room.getInitial(), 'G');
 		room = board.getCellAt(7, 22);
 		assertEquals(room.getInitial(), 'M');
+	}
+	
+	@Test
+	public void testRoomCount() {
+		int numRooms = 0;
+		ArrayList<Character> initialsFound = new ArrayList<Character>();
+		initialsFound.add('X');
+		initialsFound.add('W');
+		for(int i = 0; i < board.getNumRows(); i++) {
+			for(int j = 0; j < board.getNumColumns(); j++) {
+				BoardCell thisCell = board.getCellAt(i, j);
+				if(!initialsFound.contains(thisCell.getInitial())) {
+					initialsFound.add(thisCell.getInitial());
+					numRooms++;
+				}
+			}
+		}
+		assertEquals(numRooms, 9);
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
