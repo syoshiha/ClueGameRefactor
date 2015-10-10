@@ -5,7 +5,9 @@ package clueTest;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -124,20 +126,14 @@ public class FileInitTests {
 	
 	@Test
 	public void testRoomCount() {
-		int numRooms = 0;
-		ArrayList<Character> initialsFound = new ArrayList<Character>();
-		initialsFound.add('X');
-		initialsFound.add('W');
+		Set<Character> initialsFound = new HashSet<Character>();
 		for(int i = 0; i < board.getNumRows(); i++) {
 			for(int j = 0; j < board.getNumColumns(); j++) {
 				BoardCell thisCell = board.getCellAt(i, j);
-				if(!initialsFound.contains(thisCell.getInitial())) {
-					initialsFound.add(thisCell.getInitial());
-					numRooms++;
-				}
+				initialsFound.add(thisCell.getInitial());
 			}
 		}
-		assertEquals(numRooms, 9);
+		assertEquals(initialsFound.size(), 11);	// Includes walkway and closet
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
