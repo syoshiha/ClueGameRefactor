@@ -20,7 +20,7 @@ public class BoardAdjTargetTests {
 	
 	@BeforeClass
 	public static void setUp() {
-		board = new Board("ClueLayout.csv", "ClueLegend.txt");
+		board = new Board("Layout.csv", "Legend.txt");
 		board.initialize();
 	}
 	
@@ -102,7 +102,9 @@ public class BoardAdjTargetTests {
 		// Test on top edge of board
 		LinkedList<BoardCell> testList = board.getAdjList(0, 4);
 		assertTrue(testList.contains(board.getCellAt(1, 4)));
-		assertEquals(1, testList.size());
+		assertTrue(testList.contains(board.getCellAt(0, 3)));
+		assertTrue(testList.contains(board.getCellAt(0, 5)));
+		assertEquals(3, testList.size());
 		
 		// Test on left edge of board, three possible pieces
 		testList = board.getAdjList(11, 0);
@@ -136,13 +138,15 @@ public class BoardAdjTargetTests {
 		testList = board.getAdjList(5, 24);
 		assertTrue(testList.contains(board.getCellAt(5, 23)));
 		assertTrue(testList.contains(board.getCellAt(4, 24)));
-		assertEquals(2, testList.size());
+		assertTrue(testList.contains(board.getCellAt(6, 24)));
+		assertEquals(3, testList.size());
 
 		// Test on walkway next to  door that is not in the needed
 		// direction to enter
-			testList = board.getAdjList(6, 0);
-			assertTrue(testList.contains(board.getCellAt(6, 1)));
-			assertEquals(1, testList.size());
+			testList = board.getAdjList(5, 4);
+			assertTrue(testList.contains(board.getCellAt(4, 4)));
+			assertTrue(testList.contains(board.getCellAt(6, 4)));
+			assertEquals(2, testList.size());
 	}
 	
 	// Tests of just walkways, 1 step, includes on edge of board and beside room

@@ -101,6 +101,8 @@ public class Board {
 			row++;
 		}
 		scan.close();
+		adjMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
+		calcAdjacencies();
 	}
 	
 	private int getBoardConfigRows() throws FileNotFoundException {
@@ -181,16 +183,20 @@ public class Board {
 				}
 				else {
 					if(i > 0) {
-						neighbors.add(board[i - 1][j]);
+						if (!board[i - 1][j].isRoom() || (board[i - 1][j].isDoorway() && board[i - 1][j].getDoorDirection() == DoorDirection.DOWN))
+							neighbors.add(board[i - 1][j]);
 					}
 					if(i < numRows - 1) {
-						neighbors.add(board[i + 1][j]);
+						if (!board[i + 1][j].isRoom() || (board[i + 1][j].isDoorway() && board[i + 1][j].getDoorDirection() == DoorDirection.UP))
+							neighbors.add(board[i + 1][j]);
 					}
 					if(j > 0) {
-						neighbors.add(board[i][j - 1]);
+						if(!board[i][j - 1].isRoom() || (board[i][j - 1].isDoorway() && board[i][j - 1].getDoorDirection() == DoorDirection.RIGHT))
+							neighbors.add(board[i][j - 1]);
 					}
 					if(j < numColumns - 1) {
-						neighbors.add(board[i][j + 1]);
+						if (!board[i][j + 1].isRoom() || (board[i][j + 1].isDoorway() && board[i][j + 1].getDoorDirection() == DoorDirection.LEFT))
+							neighbors.add(board[i][j + 1]);
 					}
 					adjMatrix.put(board[i][j], neighbors);
 				}
@@ -211,7 +217,8 @@ public class Board {
 	}
 	
 	public LinkedList<BoardCell> getAdjList(int i, int j) {
-		return null;
+		System.out.println("adj matrix: " + adjMatrix.toString());
+		return adjMatrix.get(board[i][j]);
 	}
 
 	public int getNumRows() {
