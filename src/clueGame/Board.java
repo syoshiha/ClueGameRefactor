@@ -8,7 +8,7 @@ public class Board {
 	private int numRows;
 	private int numColumns;
 	public static final int BOARD_SIZE = 5;
-	BoardCell[] board;
+	BoardCell[][] board;
 	Map<Character, String> rooms;
 	Map<BoardCell, LinkedList<BoardCell>> adjMatrix;
 	Set<BoardCell> targets;
@@ -29,10 +29,11 @@ public class Board {
 	}
 
 	public void initialize(){
-		
+		loadRoomConfig(roomConfigFile);
+		loadBoardConfig(boardConfigFile);		
 	}
 	
-	public void loadroomConfig(String filename){
+	public void loadRoomConfig(String filename){
 		
 	}
 	
