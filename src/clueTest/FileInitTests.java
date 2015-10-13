@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.BeforeClass;
@@ -17,7 +18,7 @@ import clueGame.BoardCell;
 import clueGame.DoorDirection;
 
 public class FileInitTests {
-	public static final int NUM_ROOMS = 9;
+	public static final int NUM_ROOMS = 11;
 	public static final int NUM_ROWS = 21;
 	public static final int NUM_COLUMNS = 25;
 
@@ -125,7 +126,29 @@ public class FileInitTests {
 	}
 	
 	@Test
-	public void testRoomCount() {
+	public void testCharacterToRoomMapping() {
+		Map<Character, String> rooms = board.getRooms();
+		assertEquals(rooms.get('K'), "Kitchen");
+		assertEquals(rooms.get('P'), "Pool");
+		assertEquals(rooms.get('B'), "Balcony");
+		assertEquals(rooms.get('L'), "Living room");
+		assertEquals(rooms.get('G'), "Game room");
+		assertEquals(rooms.get('S'), "Study");
+		assertEquals(rooms.get('D'), "Dining room");
+		assertEquals(rooms.get('R'), "Restroom");
+		assertEquals(rooms.get('M'), "Master bedroom");
+		assertEquals(rooms.get('X'), "Closet");
+		assertEquals(rooms.get('W'), "Walkway");		
+	}
+	
+	@Test
+	public void testRoomMapCount() {
+		Map<Character, String> rooms = board.getRooms();
+		assertEquals(rooms.size(), NUM_ROOMS);	// Includes walkway and closet
+	}
+	
+	@Test
+	public void testLoadedRoomCount() {
 		Set<Character> initialsFound = new HashSet<Character>();
 		for(int i = 0; i < board.getNumRows(); i++) {
 			for(int j = 0; j < board.getNumColumns(); j++) {
@@ -133,7 +156,7 @@ public class FileInitTests {
 				initialsFound.add(thisCell.getInitial());
 			}
 		}
-		assertEquals(initialsFound.size(), 11);	// Includes walkway and closet
+		assertEquals(initialsFound.size(), NUM_ROOMS);	// Includes walkway and closet
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
