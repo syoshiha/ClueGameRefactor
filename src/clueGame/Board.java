@@ -1,7 +1,10 @@
 package clueGame;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Board {
@@ -9,7 +12,7 @@ public class Board {
 	private int numColumns;
 	public static final int BOARD_SIZE = 5;
 	BoardCell[][] board;
-	Map<Character, String> rooms;
+	static Map<Character, String> rooms;
 	Map<BoardCell, LinkedList<BoardCell>> adjMatrix;
 	Set<BoardCell> targets;
 	String boardConfigFile;
@@ -28,17 +31,37 @@ public class Board {
 		this.roomConfigFile = roomConfigFile;
 	}
 
-	public void initialize(){
-		loadRoomConfig(roomConfigFile);
-		loadBoardConfig(boardConfigFile);		
+	public void initialize() {
+		try {
+			loadRoomConfig(roomConfigFile);
+			loadBoardConfig(boardConfigFile);
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void loadRoomConfig(String filename){
 		
 	}
 	
-	public void loadBoardConfig(String filename){
-		
+	public void loadBoardConfig(String filename) throws FileNotFoundException{
+		FileReader fin = new FileReader(filename);
+		Scanner scan = new Scanner(fin);
+		int row = 0;
+		int column = 0;
+		while(scan.hasNext()) {
+			row++;
+			column = 0;
+			String nextLine = scan.next();	// This is a single line of comma-separated values
+			nextLine.replace(',', ' ');		// Commas replaced by spaces, to generate a readable list
+			Scanner scanIn = new Scanner(nextLine);
+			while(scanIn.hasNext()) {
+				column++;
+				String nextEntry = scanIn.next();
+				board[row][column] = new BoardCell(row, column, nextEntry.charAt(0));
+			}
+		}
+		scan.close();
 	}
 	
 	public void calcAdjacencies(){
@@ -50,11 +73,11 @@ public class Board {
 	}
 	
 	public BoardCell getCellAt(int row, int column){
-		return null;
+		return board[row][column];
 	}
 
 	public static Map<Character, String> getRooms() {
-		return null;
+		return rooms;
 	}
 	
 	public LinkedList<BoardCell> getAdjList(int i, int j) {
