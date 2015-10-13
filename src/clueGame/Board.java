@@ -2,6 +2,7 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
@@ -23,6 +24,7 @@ public class Board {
 		super();
 		this.boardConfigFile = "Layout.csv";
 		this.roomConfigFile = "Legend.txt";
+		rooms = new HashMap <Character, String>();
 	}
 
 	public Board(String boardConfigFile, String roomConfigFile) { //constructor with board and room files passed in for testing with other files
