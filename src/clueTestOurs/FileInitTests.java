@@ -1,4 +1,4 @@
-package clueTest;
+package clueTestOurs;
 
 // Doing a static import allows me to write assertEquals rather than
 // Assert.assertEquals
