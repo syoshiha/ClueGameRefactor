@@ -1,7 +1,10 @@
 package clueGame;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Board {
@@ -33,8 +36,17 @@ public class Board {
 		loadBoardConfig(boardConfigFile);		
 	}
 	
-	public void loadRoomConfig(String filename){
-		
+	public void loadRoomConfig(String filename) throws FileNotFoundException{
+		FileReader reader = new FileReader(filename);
+		Scanner in = new Scanner(reader);
+		in.useDelimiter(",");
+		while (in.hasNextLine()){
+			char key = in.next().charAt(0); //gets first char as Key
+			String value = in.nextLine(); //rest of the line is the value
+			rooms.put(key, value);
+			System.out.println("key: "+key +" value: " +value);
+		}
+		in.close();
 	}
 	
 	public void loadBoardConfig(String filename){
