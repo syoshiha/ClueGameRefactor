@@ -146,7 +146,56 @@ public class Board {
 	}
 	
 	public void calcAdjacencies(){
-		
+		for(int i = 0; i < numRows; i++) {
+			for(int j = 0; j < numColumns; j++) {
+				LinkedList<BoardCell> neighbors = new LinkedList<BoardCell>();
+				if (board[i][j].isRoom() && !board[i][j].isDoorway()){
+					adjMatrix.put(board[i][j], neighbors);
+					continue;
+				}
+				else if (board[i][j].isDoorway()) {
+					DoorDirection initial = board[i][j].getDoorDirection();
+					switch(initial) {							// the enumerator class
+						case UP: if(i > 0) {
+							neighbors.add(board[i - 1][j]);
+							adjMatrix.put(board[i][j], neighbors);
+						}
+							break;
+						case DOWN: if(i < numRows - 1) {
+							neighbors.add(board[i + 1][j]);
+							adjMatrix.put(board[i][j], neighbors);
+						}
+							break;
+						case LEFT: if(j > 0) {
+							neighbors.add(board[i][j - 1]);
+							adjMatrix.put(board[i][j], neighbors);
+						}
+							break;
+						case RIGHT: if(j < numColumns - 1) {
+							neighbors.add(board[i][j + 1]);
+							adjMatrix.put(board[i][j], neighbors);
+						}
+							break;
+						default: System.out.println("Unknown Door Direction");;
+					}
+				}
+				else {
+					if(i > 0) {
+						neighbors.add(board[i - 1][j]);
+					}
+					if(i < numRows - 1) {
+						neighbors.add(board[i + 1][j]);
+					}
+					if(j > 0) {
+						neighbors.add(board[i][j - 1]);
+					}
+					if(j < numColumns - 1) {
+						neighbors.add(board[i][j + 1]);
+					}
+					adjMatrix.put(board[i][j], neighbors);
+				}
+			}
+		}
 	}
 
 	public void calcTargets(int row, int column, int pathLength){
