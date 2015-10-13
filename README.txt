@@ -1,3 +1,3 @@
 Jason Ziolo
 Hayden Scott
-Part 1 Submission - Failure tests
+Part 2 Submission - Successful file init tests, adjacency/targeting failure tests

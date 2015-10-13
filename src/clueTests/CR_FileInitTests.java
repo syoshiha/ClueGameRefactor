@@ -32,7 +32,7 @@ public class CR_FileInitTests {
 	public static void setUp() {
 		// Create a new Board using the valid files. Note that
 		// the default filenames must be attributes of the Board class. 
-		board = new Board();
+		board = new Board("./CRader/ClueLayout.csv", "./CRader/ClueLegend.txt");
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -118,7 +118,7 @@ public class CR_FileInitTests {
 		// testing exceptions in lab writeup. 
 		// Note that we are using a LOCAL Board variable, not the static one 
 		// set up by @BeforeClass
-		Board board = new Board("ClueLayoutBadColumns.csv", "ClueLegend.txt");
+		Board board = new Board("./CRader/ClueLayoutBadColumns.csv", "./CRader/ClueLegend.txt");
 		// Instead of initialize, we call the two load functions directly
 		board.loadRoomConfig();
 		// This one should throw an exception
@@ -127,14 +127,14 @@ public class CR_FileInitTests {
 	// Test that an exception is thrown for a bad config file
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
-		Board board = new Board("ClueLayoutBadRoom.csv", "ClueLegend.txt");
+		Board board = new Board("./CRader/ClueLayoutBadRoom.csv", "./CRader/ClueLegend.txt");
 		board.loadRoomConfig();
 		board.loadBoardConfig();
 	}
 	// Test that an exception is thrown for a bad room config file
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
-		Board board = new Board("ClueLayout.csv", "ClueLegendBadFormat.txt");
+		Board board = new Board("./CRader/ClueLayout.csv", "./CRader/ClueLegendBadFormat.txt");
 		board.loadRoomConfig();
 	}
 }

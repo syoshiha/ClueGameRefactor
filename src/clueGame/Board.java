@@ -37,7 +37,7 @@ public class Board {
 			loadRoomConfig();
 			loadBoardConfig();
 		} catch (FileNotFoundException e) {
-			System.out.println("FILE NOT FOUND");
+			System.out.println("File not found. " + e.getMessage());
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
@@ -83,6 +83,9 @@ public class Board {
 			Scanner scanIn = new Scanner(nextLine);
 			while(scanIn.hasNext()) {
 				String nextEntry = scanIn.next();
+				if(!rooms.containsKey(nextEntry.charAt(0))) {
+					throw new BadConfigFormatException("Bad room type");
+				}
 				if(nextEntry.length() > 1) {	// if this is true, then the cell must be a door
 					DoorDirection d = DoorDirection.convert(nextEntry.charAt(1));
 					this.board[row][column] = new BoardCell(row, column, nextEntry.charAt(0), d);

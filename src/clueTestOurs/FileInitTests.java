@@ -145,7 +145,6 @@ public class FileInitTests {
 	
 	@Test
 	public void testRoomMapCount() {
-		System.out.println("testRoomMapCount");
 		Map<Character, String> rooms = Board.getRooms();
 		assertEquals(rooms.size(), NUM_ROOMS);	// Includes walkway and closet
 	}
