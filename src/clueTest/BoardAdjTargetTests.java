@@ -77,15 +77,14 @@ public class BoardAdjTargetTests {
 		assertTrue(testList.contains(board.getCellAt(5, 5)));
 		assertTrue(testList.contains(board.getCellAt(6, 6)));
 		assertTrue(testList.contains(board.getCellAt(6, 4)));
-		assertTrue(testList.contains(board.getCellAt(7, 6)));
-		assertEquals(4, testList.size());
-		// Test beside a door direction LEFT
-		testList = board.getAdjList(8, 5);
-		assertTrue(testList.contains(board.getCellAt(8, 4)));
-		assertTrue(testList.contains(board.getCellAt(8, 6)));
-		assertTrue(testList.contains(board.getCellAt(9, 5)));
 		assertTrue(testList.contains(board.getCellAt(7, 5)));
 		assertEquals(4, testList.size());
+		// Test beside a door direction LEFT
+		testList = board.getAdjList(0, 18);
+		assertTrue(testList.contains(board.getCellAt(0, 19)));
+		assertTrue(testList.contains(board.getCellAt(0, 17)));
+		assertTrue(testList.contains(board.getCellAt(1, 18)));
+		assertEquals(3, testList.size());
 		// Test beside a door direction UP
 		testList = board.getAdjList(10, 22);
 		assertTrue(testList.contains(board.getCellAt(11, 22)));
@@ -96,7 +95,7 @@ public class BoardAdjTargetTests {
 	}
 	
 	// Test a bunch of walkways i different ways
-	// These tests are LIGHT PURPLE on the planning spreadsheet
+	// These tests are LIGHT RED on the planning spreadsheet
 	@Test
 	public void testAdjacencyWalkways()
 	{
@@ -165,7 +164,7 @@ public class BoardAdjTargetTests {
 		}
 		
 		// Tests of just walkways, 2 steps
-		// These are LIGHT BLUE on the planning spreadsheet
+		// These are LIGHT GREEN on the planning spreadsheet
 		@Test
 		public void testTargetsTwoSteps() {
 			board.calcTargets(20, 19, 2);
@@ -182,7 +181,7 @@ public class BoardAdjTargetTests {
 		}
 		
 		// Tests of just walkways, 4 steps
-		// These are LIGHT BLUE on the planning spreadsheet
+		// These are LIGHT GREEN on the planning spreadsheet
 		@Test
 		public void testTargetsFourSteps() {
 			board.calcTargets(20, 5, 4);
@@ -204,7 +203,7 @@ public class BoardAdjTargetTests {
 		
 		// Tests of just walkways plus one door, 6 steps
 		// also tests going into door without using all steps
-		// These are LIGHT BLUE on the planning spreadsheet
+		// These are LIGHT GREEN on the planning spreadsheet
 		@Test
 		public void testTargetsSixSteps() {
 			board.calcTargets(4, 24, 6);
@@ -216,21 +215,22 @@ public class BoardAdjTargetTests {
 		}	
 		
 		// Test getting into a room with correct number of steps
-		// These are LIGHT BLUE on the planning spreadsheet
+		// These are LIGHT GREEN on the planning spreadsheet
 		@Test 
 		public void testTargetsIntoRoom()
 		{
 			// two rooms are exactly 1 away
 			board.calcTargets(0, 4, 1);
 			Set<BoardCell> targets= board.getTargets();
-			assertEquals(2, targets.size());
+			assertEquals(3, targets.size());
 			// one left, one right
 			assertTrue(targets.contains(board.getCellAt(0, 5)));
 			assertTrue(targets.contains(board.getCellAt(0, 3)));
+			assertTrue(targets.contains(board.getCellAt(2, 4)));
 		}
 		
 		// Test getting out of a room with 1 & 2 steps.
-		// These are LIGHT BLUE on the planning spreadsheet
+		// These are LIGHT GREEN on the planning spreadsheet
 		@Test
 		public void testRoomExit()
 		{
