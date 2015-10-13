@@ -18,6 +18,7 @@ public class Board {
 	private String roomConfigFile;
 	
 	private Map<BoardCell, LinkedList<BoardCell>> adjMatrix;
+	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 
 	public Board() { //default constructor
@@ -84,6 +85,7 @@ public class Board {
 			while(scanIn.hasNext()) {
 				String nextEntry = scanIn.next();
 				if(!rooms.containsKey(nextEntry.charAt(0))) {
+					scanIn.close();
 					throw new BadConfigFormatException("Bad room type");
 				}
 				if(nextEntry.length() > 1) {	// if this is true, then the cell must be a door
