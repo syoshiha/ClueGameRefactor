@@ -127,7 +127,7 @@ public class FileInitTests {
 	
 	@Test
 	public void testCharacterToRoomMapping() {
-		Map<Character, String> rooms = board.getRooms();
+		Map<Character, String> rooms = Board.getRooms();
 		assertEquals(rooms.get('K'), "Kitchen");
 		assertEquals(rooms.get('P'), "Pool");
 		assertEquals(rooms.get('B'), "Balcony");
@@ -143,7 +143,7 @@ public class FileInitTests {
 	
 	@Test
 	public void testRoomMapCount() {
-		Map<Character, String> rooms = board.getRooms();
+		Map<Character, String> rooms = Board.getRooms();
 		assertEquals(rooms.size(), NUM_ROOMS);	// Includes walkway and closet
 	}
 	

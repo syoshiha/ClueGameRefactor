@@ -67,8 +67,15 @@ public class Board {
 			while(scanIn.hasNext()) {
 				column++;
 				String nextEntry = scanIn.next();
-				board[row][column] = new BoardCell(row, column, nextEntry.charAt(0));
+				if(nextEntry.length() > 1) {	// if this is true, then the cell must be a door
+					DoorDirection d = DoorDirection.convert(nextEntry.charAt(1));
+					board[row][column] = new BoardCell(row, column, nextEntry.charAt(0), d);
+				}
+				else {
+					board[row][column] = new BoardCell(row, column, nextEntry.charAt(0), DoorDirection.NONE);
+				}
 			}
+			scanIn.close();
 		}
 		scan.close();
 	}
