@@ -29,7 +29,7 @@ public class BoardCell {
 	}
 
 	public DoorDirection getDoorDirection() {
-		return DoorDirection.NONE;
+		return doorDirection;
 	}
 
 	public char getInitial() {

@@ -24,8 +24,8 @@ public class FileInitTests {
 
 	private static final String BAD_ROOM_FILE = "BadClueLayout.csv";
 	private static final String BAD_LEGEND_FILE = "BadClueLegend.txt";
-	private static final String CORRECT_ROOM_FILE = "ClueLayout.csv";
-	private static final String CORRECT_LEGEND_FILE = "ClueLegend.txt";
+	private static final String CORRECT_ROOM_FILE = "Layout.csv";
+	private static final String CORRECT_LEGEND_FILE = "Legend.txt";
 	
 	private static Board board;
 	
@@ -100,7 +100,7 @@ public class FileInitTests {
 				}
 			}
 		}
-		assertEquals(numDoors, 15);
+		assertEquals(15, numDoors);
 	}
 	
 	@Test
@@ -127,6 +127,8 @@ public class FileInitTests {
 	
 	@Test
 	public void testCharacterToRoomMapping() {
+		board = new Board();
+		board.initialize();	// Sets up the board
 		Map<Character, String> rooms = Board.getRooms();
 		assertEquals(rooms.get('K'), "Kitchen");
 		assertEquals(rooms.get('P'), "Pool");
@@ -143,6 +145,7 @@ public class FileInitTests {
 	
 	@Test
 	public void testRoomMapCount() {
+		System.out.println("testRoomMapCount");
 		Map<Character, String> rooms = Board.getRooms();
 		assertEquals(rooms.size(), NUM_ROOMS);	// Includes walkway and closet
 	}
@@ -162,14 +165,14 @@ public class FileInitTests {
 	@Test (expected = BadConfigFormatException.class)
 	public void testExceptionBadRoom() throws BadConfigFormatException, FileNotFoundException {
 		Board testBoard = new Board(BAD_ROOM_FILE, CORRECT_LEGEND_FILE);
-		testBoard.loadBoardConfig();
 		testBoard.loadRoomConfig();
+		testBoard.loadBoardConfig();
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testExceptionBadLegend() throws BadConfigFormatException, FileNotFoundException {
 		Board testBoard = new Board(CORRECT_ROOM_FILE, BAD_LEGEND_FILE);
-		testBoard.loadBoardConfig();
 		testBoard.loadRoomConfig();
+		testBoard.loadBoardConfig();
 	}	
 }

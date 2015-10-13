@@ -12,20 +12,19 @@ public class Board {
 	private int numRows;
 	private int numColumns;
 	public static final int BOARD_SIZE = 5;
-	BoardCell[][] board;
-	static Map<Character, String> rooms;
-	Map<BoardCell, LinkedList<BoardCell>> adjMatrix;
-	Set<BoardCell> targets;
-	String boardConfigFile;
-	String roomConfigFile;
+	private BoardCell[][] board;
+	private static Map<Character, String> rooms;
+	private String boardConfigFile;
+	private String roomConfigFile;
 	
+	private Map<BoardCell, LinkedList<BoardCell>> adjMatrix;
+	private Set<BoardCell> targets;
 
 	public Board() { //default constructor
 		super();
 		this.boardConfigFile = "Layout.csv";
 		this.roomConfigFile = "Legend.txt";
-		rooms = new HashMap <Character, String>();
-	}
+		}
 
 	public Board(String boardConfigFile, String roomConfigFile) { //constructor with board and room files passed in for testing with other files
 		super();
@@ -35,51 +34,110 @@ public class Board {
 
 	public void initialize() {
 		try {
-			loadRoomConfig(roomConfigFile);
-			loadBoardConfig(boardConfigFile);
+			loadRoomConfig();
+			loadBoardConfig();
 		} catch (FileNotFoundException e) {
+			System.out.println("FILE NOT FOUND");
+		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
-	public void loadRoomConfig(String filename) throws FileNotFoundException{
-		FileReader reader = new FileReader(filename);
+	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException {
+		FileReader reader = new FileReader(roomConfigFile);
 		Scanner in = new Scanner(reader);
-		in.useDelimiter(",");
+		Map<Character, String> tempRooms = new HashMap<Character, String>();
 		while (in.hasNextLine()){
-			char key = in.next().charAt(0); //gets first char as Key
-			String value = in.nextLine(); //rest of the line is the value
-			rooms.put(key, value);
-			System.out.println("key: "+key +" value: " +value);
+			String value = in.nextLine();
+			value = value.replace(", ", " ");
+			value = value.replace(",", "");
+			int lastSpot = value.lastIndexOf(" "); // get rid of card
+			value = value.substring(0, lastSpot);
+			if(!value.contains(" ")) {
+				in.close();
+				throw new BadConfigFormatException("Bad legend file; lacks a room name for initial");
+			}
+			Scanner scan = new Scanner(value);
+			char key = scan.next().charAt(0);
+			String put = scan.nextLine();
+			scan.close();
+			put = put.trim();
+			tempRooms.put(key, put);
 		}
+		rooms = tempRooms;
 		in.close();
 	}
 	
-	public void loadBoardConfig(String filename) throws FileNotFoundException{
-		FileReader fin = new FileReader(filename);
+	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException{
+		numRows = getBoardConfigRows();
+		numColumns = getBoardConfigColumns();
+		board = new BoardCell[numRows][numColumns];
+		FileReader fin = new FileReader(boardConfigFile);
 		Scanner scan = new Scanner(fin);
 		int row = 0;
 		int column = 0;
 		while(scan.hasNext()) {
-			row++;
 			column = 0;
 			String nextLine = scan.next();	// This is a single line of comma-separated values
-			nextLine.replace(',', ' ');		// Commas replaced by spaces, to generate a readable list
+			nextLine = nextLine.replace(',', ' ');		// Commas replaced by spaces, to generate a readable list
 			Scanner scanIn = new Scanner(nextLine);
 			while(scanIn.hasNext()) {
-				column++;
 				String nextEntry = scanIn.next();
 				if(nextEntry.length() > 1) {	// if this is true, then the cell must be a door
 					DoorDirection d = DoorDirection.convert(nextEntry.charAt(1));
-					board[row][column] = new BoardCell(row, column, nextEntry.charAt(0), d);
+					this.board[row][column] = new BoardCell(row, column, nextEntry.charAt(0), d);
 				}
 				else {
-					board[row][column] = new BoardCell(row, column, nextEntry.charAt(0), DoorDirection.NONE);
+					this.board[row][column] = new BoardCell(row, column, nextEntry.charAt(0), DoorDirection.NONE);
 				}
+				column++;
 			}
 			scanIn.close();
+			row++;
 		}
 		scan.close();
+	}
+	
+	private int getBoardConfigRows() throws FileNotFoundException {
+		FileReader fin = new FileReader(boardConfigFile);
+		Scanner scan = new Scanner(fin);
+		int count = 0;
+		while(scan.hasNext()) {
+			scan.next();
+			count++;
+		}
+		scan.close();
+		return count;
+	}
+	
+	private int getBoardConfigColumns() throws FileNotFoundException, BadConfigFormatException {
+		FileReader fin = new FileReader(boardConfigFile);
+		Scanner scan = new Scanner(fin);
+		int count = 0;
+		int maxCount = 0;
+		boolean firstGo = true;
+		while(scan.hasNext()) {
+			count = 0;
+			String nextCol = scan.next();
+			Scanner scanIn = new Scanner(nextCol);
+			scanIn.useDelimiter(",");
+			while(scanIn.hasNext()) {
+				scanIn.next();
+				count++;
+			}
+			scanIn.close();
+			if(firstGo) {
+				maxCount = count;
+				firstGo = false;
+			}
+			else {
+				if(count != maxCount) {
+					throw new BadConfigFormatException("Number of rows or columns is not consistent");
+				}
+			}
+		}
+		scan.close();
+		return count;
 	}
 	
 	public void calcAdjacencies(){
@@ -99,33 +157,20 @@ public class Board {
 	}
 	
 	public LinkedList<BoardCell> getAdjList(int i, int j) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public int getNumRows() {
-		// TODO Auto-generated method stub
-		return 0;
+		return numRows;
 	}
 
 	public int getNumColumns() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public void loadRoomConfig() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void loadBoardConfig() {
-		// TODO Auto-generated method stub
+		return numColumns;
 	}
 	
 	public Set<BoardCell> getTargets() {
 		return null;
 	}
-	
 	
 }
 
