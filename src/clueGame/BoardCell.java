@@ -6,6 +6,9 @@ public class BoardCell {
 	private char initial;
 	private DoorDirection doorDirection;
 	
+	public static final char WALKWAY_INITIAL = 'W';
+	public static final char CLOSET_INITIAL = 'X';
+	
 	public BoardCell(int row, int column, char initial, DoorDirection doorDirection) {
 		this.row = row;
 		this.column = column;
@@ -14,11 +17,17 @@ public class BoardCell {
 	}
 	
 	public boolean isWalkway() {
+		if(initial == WALKWAY_INITIAL) {
+			return true;
+		}
 		return false;
 	}
 	
 	public boolean isRoom() {
-		return false;
+		if(initial == WALKWAY_INITIAL || initial == CLOSET_INITIAL) {
+			return false;
+		}
+		return true;
 	}
 	
 	public boolean isDoorway() {
