@@ -1,3 +1,57 @@
+commit d97ee2ddc090adfff6c4dfb339fa96a0a1201afe
+Author: Jason Ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 13 19:35:14 2015 -0600
+
+    fixed closet movement
+
+commit 3be9dbf7442bd5884806e2dbd81d171b278b16f7
+Author: HelluvaEnginerd <haydenscott573@gmail.com>
+Date:   Tue Oct 13 19:25:08 2015 -0600
+
+    all our tests working
+
+commit 9a97dc6a35f46ab11d1a37556845892dbe26e9dc
+Author: HelluvaEnginerd <haydenscott573@gmail.com>
+Date:   Tue Oct 13 19:01:32 2015 -0600
+
+    all of our tests besides calc6steps working
+
+commit 668b21db79f923279fb5977d25e5228bd69240d0
+Author: HelluvaEnginerd <haydenscott573@gmail.com>
+Date:   Tue Oct 13 18:32:33 2015 -0600
+
+    all tests but 'Targets into room', 'targets6steps', and 'targets4steps' working
+
+commit 26f5c1259fc26bc0ac39c295fd8349cff5ff0259
+Author: unknown <hascott@MZ022-37.adit.mines.edu>
+Date:   Tue Oct 13 12:14:23 2015 -0600
+
+    test adjacencies starting to work
+
+commit 1bd34eeca39b6fa76b263541f4a917753e28cfa2
+Author: unknown <hascott@MZ022-37.adit.mines.edu>
+Date:   Tue Oct 13 11:53:27 2015 -0600
+
+    calc Adjacencies written - try 1
+
+commit bdfece0c89bc239220aeecc0a50b4e6f09acff98
+Author: jason-ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 13 11:39:16 2015 -0600
+
+    fixed scanner, added necessary Sets for adj
+
+commit d5f0b20f62f04617176011440272eb11c242e0ff
+Author: jason-ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 13 11:34:31 2015 -0600
+
+    Finished definitions for BoardCell methods
+
+commit 5f1b99ec6c86e0798e83b3d32cbf97596acb65a8
+Author: Jason Ziolo <jziolo@mymail.mines.edu>
+Date:   Mon Oct 12 22:38:21 2015 -0600
+
+    Part II
+
 commit f0166f75a25a837580e2f534228a274707832570
 Author: Jason Ziolo <jziolo@mymail.mines.edu>
 Date:   Mon Oct 12 22:38:04 2015 -0600
