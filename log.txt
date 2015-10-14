@@ -1,3 +1,28 @@
+commit 3454bda017a4fc44be558b39e54d0a24d398b9ae
+Author: HelluvaEnginerd <haydenscott573@gmail.com>
+Date:   Tue Oct 13 19:38:16 2015 -0600
+
+    no more tostring for boardcell
+
+commit 3cc9e0c27be80cde59cbd98fb551ecf2d1c8f4fb
+Merge: 40bc966 954e6bf
+Author: HelluvaEnginerd <haydenscott573@gmail.com>
+Date:   Tue Oct 13 19:36:58 2015 -0600
+
+    Merge branch 'master' of https://github.com/HelluvaEnginerd/ClueGameExp
+
+commit 40bc9666d57503fa73d414a30a5b284760293482
+Author: HelluvaEnginerd <haydenscott573@gmail.com>
+Date:   Tue Oct 13 19:36:54 2015 -0600
+
+    toString for boardcell
+
+commit 954e6bfc4f15df0b100b6a95df7af7ebbb829e9e
+Author: Jason Ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 13 19:35:39 2015 -0600
+
+    added log
+
 commit d97ee2ddc090adfff6c4dfb339fa96a0a1201afe
 Author: Jason Ziolo <jziolo@mymail.mines.edu>
 Date:   Tue Oct 13 19:35:14 2015 -0600
