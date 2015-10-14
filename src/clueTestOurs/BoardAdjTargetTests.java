@@ -190,13 +190,15 @@ public class BoardAdjTargetTests {
 		public void testTargetsFourSteps() {
 			board.calcTargets(20, 5, 4);
 			Set<BoardCell> targets= board.getTargets();
-			assertEquals(6, targets.size());
+			assertEquals(8, targets.size());
 			assertTrue(targets.contains(board.getCellAt(16, 5)));
 			assertTrue(targets.contains(board.getCellAt(19, 8)));
 			assertTrue(targets.contains(board.getCellAt(18, 7)));
 			assertTrue(targets.contains(board.getCellAt(17, 6)));
 			assertTrue(targets.contains(board.getCellAt(19, 6)));
 			assertTrue(targets.contains(board.getCellAt(18, 5)));
+			assertTrue(targets.contains(board.getCellAt(20, 7)));
+			assertTrue(targets.contains(board.getCellAt(17, 4)));
 			
 			// Includes a path that doesn't have enough length
 			board.calcTargets(6, 0, 4);
@@ -212,7 +214,7 @@ public class BoardAdjTargetTests {
 		public void testTargetsSixSteps() {
 			board.calcTargets(4, 24, 6);
 			Set<BoardCell> targets= board.getTargets();
-			assertEquals(3, targets.size());
+			assertEquals(3, targets.size()); //doesnt let it go into door when it hasnt used all steps
 			assertTrue(targets.contains(board.getCellAt(6, 24))); //into door without using all steps
 			assertTrue(targets.contains(board.getCellAt(4, 20)));	
 			assertTrue(targets.contains(board.getCellAt(4, 18)));
@@ -230,7 +232,7 @@ public class BoardAdjTargetTests {
 			// one left, one right
 			assertTrue(targets.contains(board.getCellAt(0, 5)));
 			assertTrue(targets.contains(board.getCellAt(0, 3)));
-			assertTrue(targets.contains(board.getCellAt(2, 4)));
+			assertTrue(targets.contains(board.getCellAt(1, 4)));
 		}
 		
 		// Test getting out of a room with 1 & 2 steps.

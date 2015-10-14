@@ -206,7 +206,7 @@ public class Board {
 	}
 
 	public void calcTargets(int row, int column, int pathLength){
-		visited = new HashSet<BoardCell>();
+		visited = new HashSet<BoardCell>(); //should we set these up here? might be ineff.
 		targets = new HashSet<BoardCell>();
 		visited.clear(); //clear the visited set
 		targets.clear(); //clear the targets set
@@ -241,7 +241,6 @@ public class Board {
 	}
 	
 	public LinkedList<BoardCell> getAdjList(int i, int j) {
-		//System.out.println("adj matrix: " + adjMatrix.toString());
 		return adjMatrix.get(board[i][j]);
 	}
 
