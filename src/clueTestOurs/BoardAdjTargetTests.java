@@ -203,8 +203,9 @@ public class BoardAdjTargetTests {
 			// Includes a path that doesn't have enough length
 			board.calcTargets(6, 0, 4);
 			targets= board.getTargets();
-			assertEquals(1, targets.size());
-			assertTrue(targets.contains(board.getCellAt(6, 4)));	
+			assertEquals(2, targets.size());
+			assertTrue(targets.contains(board.getCellAt(6, 4)));
+			assertTrue(targets.contains(board.getCellAt(5, 0)));
 		}	
 		
 		// Tests of just walkways plus one door, 6 steps

@@ -224,6 +224,9 @@ public class Board {
 			if(remainingSteps == 1){
 				targets.add(i);
 			}
+			else if (i.isDoorway()){
+				targets.add(i);
+			}
 			else {
 				targets.addAll(findAllTargets(i, remainingSteps-1));
 			}
