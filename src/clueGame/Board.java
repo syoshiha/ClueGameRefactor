@@ -3,6 +3,7 @@ package clueGame;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
@@ -205,9 +206,32 @@ public class Board {
 	}
 
 	public void calcTargets(int row, int column, int pathLength){
-		
+		visited = new HashSet<BoardCell>();
+		targets = new HashSet<BoardCell>();
+		visited.clear(); //clear the visited set
+		targets.clear(); //clear the targets set
+		visited.add(board[row][column]);
+		targets = findAllTargets(board[row][column], pathLength);
 	}
 	
+	private Set<BoardCell> findAllTargets(BoardCell currentCell, int remainingSteps) {
+		visited.add(currentCell);
+		LinkedList<BoardCell> adj = new LinkedList<BoardCell>(adjMatrix.get(currentCell));	//new linked list of cells that have not been visited
+		for (BoardCell i:visited){
+			adj.remove(i);
+		}
+		for (BoardCell i:adj){
+			if(remainingSteps == 1){
+				targets.add(i);
+			}
+			else {
+				targets.addAll(findAllTargets(i, remainingSteps-1));
+			}
+			visited.remove(i);
+		}
+		return targets;
+	}
+
 	public BoardCell getCellAt(int row, int column){
 		return board[row][column];
 	}
@@ -217,7 +241,7 @@ public class Board {
 	}
 	
 	public LinkedList<BoardCell> getAdjList(int i, int j) {
-		System.out.println("adj matrix: " + adjMatrix.toString());
+		//System.out.println("adj matrix: " + adjMatrix.toString());
 		return adjMatrix.get(board[i][j]);
 	}
 
@@ -230,7 +254,7 @@ public class Board {
 	}
 	
 	public Set<BoardCell> getTargets() {
-		return null;
+		return targets;
 	}
 	
 }
