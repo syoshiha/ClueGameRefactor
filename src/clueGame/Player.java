@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Player {
@@ -13,6 +14,11 @@ public class Player {
 	private Set<Card> myCards;
 	private Set<Card> seenCards;
 
+	public Player() {
+		myCards = new HashSet<Card>();
+		seenCards = new HashSet<Card>();
+	}
+	
 	public Card disproveSuggestion(Solution suggestion) {
 		return new Card();
 	}
@@ -60,5 +66,13 @@ public class Player {
 	
 	public Set<Card> getSeenCards() {
 		return seenCards;
+	}
+	
+	public void giveCard(Card card) {
+		myCards.add(card);
+	}
+	
+	public void showCard(Card card) {
+		seenCards.add(card);
 	}
 }

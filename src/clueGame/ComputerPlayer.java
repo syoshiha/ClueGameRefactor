@@ -15,5 +15,9 @@ public class ComputerPlayer extends Player {
 	public void makeSuggestion(Board board, BoardCell location) {
 		
 	}
+	
+	public ComputerPlayer() {
+		super();
+	}
  
 }

@@ -2,6 +2,8 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -226,7 +228,27 @@ public class Board {
 	}
 	
 	public void dealCards() {
+		ArrayList<Card> shuffledCards = new ArrayList<Card>();
+		shuffledCards.addAll(cardDeck);
+		Collections.shuffle(shuffledCards);
 		
+		while (!shuffledCards.isEmpty()) {
+			try {
+				
+				// Give human a card
+				humanPlayer.giveCard(shuffledCards.remove(0));
+				
+				// Give each computer player a card
+				for (Player player : compPlayers) {
+					player.giveCard(shuffledCards.remove(0));
+				}
+				
+			} catch (Exception e) {
+				
+				// Break when there are no more cards to deal
+				break;
+			}
+		}
 	}
 	
 	private int getBoardConfigRows() throws FileNotFoundException {

@@ -173,12 +173,15 @@ public class GameSetupTests {
 		
 		// Check that each player has about the same number of cards.
 		// Each player should have either x or x-1 cards.
-		ArrayList<Integer> numCardsPerPlayer = new ArrayList<Integer>();
+		Set<Integer> numCardsPerPlayer = new HashSet<Integer>();
 		for (Player player : allPlayers) {
 			numCardsPerPlayer.add(player.getMyCards().size());
 		}
-		assertTrue(numCardsPerPlayer.size() == 2);
-		assertTrue(Math.abs(numCardsPerPlayer.get(0) - numCardsPerPlayer.get(1)) == 1);
+		assertEquals(numCardsPerPlayer.size(), 2);
+		for (Integer i : numCardsPerPlayer) {
+			assertTrue(i == Collections.max(numCardsPerPlayer) ||
+					   i == Collections.max(numCardsPerPlayer) - 1);
+		}
 	}
 
 }
