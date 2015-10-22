@@ -15,6 +15,7 @@ public class Board {
 	public static final int BOARD_SIZE = 5;
 	private BoardCell[][] board;
 	private static Map<Character, String> rooms;
+	private Set<Card> cardDeck;
 	private HumanPlayer humanPlayer;
 	private Set<ComputerPlayer> compPlayers;
 	private String boardConfigFile;
@@ -340,6 +341,10 @@ public class Board {
 	
 	public Set<ComputerPlayer> getCompPlayers() {
 		return compPlayers;
+	}
+	
+	public Set<Card> getDeck() {
+		return cardDeck;
 	}
 }
 

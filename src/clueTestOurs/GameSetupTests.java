@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.Card;
+import clueGame.CardType;
 import clueGame.ComputerPlayer;
 
 public class GameSetupTests {
@@ -73,6 +75,58 @@ public class GameSetupTests {
 				assertEquals(1, 0);
 			}
 		}
+	}
+	
+	@Test
+	public void testCardLoading() {
+		Set<Card> deck = board.getDeck();
+		
+		// Count the number of people, rooms, and weapons
+		int numPeople = 0;
+		int numRooms = 0;
+		int numWeapons = 0;
+
+		for (Card card : deck) {
+			if (card.getCardType() == CardType.PERSON) {
+				numPeople++;
+			} else if (card.getCardType() == CardType.ROOM) {
+				numRooms++;
+			} else if (card.getCardType() == CardType.WEAPON) {
+				numWeapons++;
+			} else {
+				// The card type should be one of the types listed above,
+				// otherwise the test should fail.
+				assertEquals(0, 1);
+			}
+		}
+		
+		// The deck should have 9 rooms, 6 people, and 6 weapons = 21 total
+		assertEquals(numPeople, 6);
+		assertEquals(numRooms, 9);
+		assertEquals(numWeapons, 6);
+		assertEquals(deck.size(), 21);
+		
+		// Check that the deck contains "Hammer", "John Smith", and "Game Room"
+		boolean personFound = false;
+		boolean weaponFound = false;
+		boolean roomFound = false;
+		
+		for (Card card : deck) {
+			if (card.getCardType() == CardType.PERSON &&
+				card.getCardName() == "John Smith") {
+				personFound = true;
+			}
+			if (card.getCardType() == CardType.WEAPON &&
+				card.getCardName() == "Hammer") {
+				weaponFound = true;
+			}
+			if (card.getCardType() == CardType.ROOM &&
+				card.getCardName() == "Game Room") {
+				roomFound = true;
+			}
+		}
+		
+		assertTrue(personFound && weaponFound && roomFound);
 	}
 
 }
