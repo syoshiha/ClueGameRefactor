@@ -1,0 +1,6 @@
+Gun
+Sword
+Crossbow
+Mace
+Axe
+Hammer
