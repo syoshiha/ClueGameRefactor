@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
+import java.util.Set;
 
 public class Player {
 	private String playerName;
@@ -9,8 +10,8 @@ public class Player {
 	private int column;
 	private Color color;
 	
-	private Card myCards;
-	private Card seenCards;
+	private Set<Card> myCards;
+	private Set<Card> seenCards;
 
 	public Card disproveSuggestion(Solution suggestion) {
 		return new Card();
@@ -51,5 +52,13 @@ public class Player {
 	
 	public void setCol(int col) {
 		this.column = col;
+	}
+	
+	public Set<Card> getMyCards() {
+		return myCards;
+	}
+	
+	public Set<Card> getSeenCards() {
+		return seenCards;
 	}
 }

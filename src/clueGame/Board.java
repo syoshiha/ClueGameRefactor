@@ -72,6 +72,8 @@ public class Board {
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		dealCards();
 	}
 	
 	public void selectAnswer() {
@@ -221,6 +223,10 @@ public class Board {
 		scan.close();
 		adjMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
 		calcAdjacencies();
+	}
+	
+	public void dealCards() {
+		
 	}
 	
 	private int getBoardConfigRows() throws FileNotFoundException {

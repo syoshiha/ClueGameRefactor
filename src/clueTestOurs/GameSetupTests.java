@@ -3,6 +3,8 @@ package clueTestOurs;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
+import clueGame.Player;
 
 public class GameSetupTests {
 	
@@ -22,8 +25,10 @@ public class GameSetupTests {
 	public void setup() {
 		board = new Board();
 		
-		// Initialize calls functions to load the board, the rooms,
-		// the people and the weapons.
+		// initialize() loads the board, rooms, people and weapons.
+		// As these things are loaded, the deck of cards is filled
+		// with the data from the config files.
+		// This function also calls dealCards() to deal the cards.
 		board.initialize();
 	}
 	
@@ -34,11 +39,14 @@ public class GameSetupTests {
 		// the human player. The remaining 5 people will be
 		// computer players.
 		
+		// Check human player
 		assertEquals(board.getHumanPlayer().getName(), "John Smith");
 		assertEquals(board.getHumanPlayer().getColor(), Color.red);
 		assertEquals(board.getHumanPlayer().getRow(), 3);
 		assertEquals(board.getHumanPlayer().getCol(), 9);
 		
+		// Exhaustively check each computer player to make sure
+		// they have the correct name, color, and starting location
 		Set<ComputerPlayer> compPlayers = board.getCompPlayers();
 		assertEquals(compPlayers.size(), 5);
 		
@@ -107,12 +115,12 @@ public class GameSetupTests {
 		assertEquals(deck.size(), 21);
 		
 		// Check that the deck contains "Hammer", "John Smith", and "Game Room"
+		// This is to ensure the cards are named correctly
 		boolean personFound = false;
 		boolean weaponFound = false;
 		boolean roomFound = false;
 		
 		for (Card card : deck) {
-			System.out.println(card.getCardType() + " " + card.getCardName());
 			if (card.getCardType().equals(CardType.PERSON) &&
 				card.getCardName().equals("John Smith")) {
 				personFound = true;
@@ -130,6 +138,47 @@ public class GameSetupTests {
 		assertTrue(personFound);
 		assertTrue(weaponFound);
 		assertTrue(roomFound);
+	}
+	
+	@Test
+	public void testCardDeal() {
+		Set<Player> allPlayers = new HashSet<Player>();
+		allPlayers.add(board.getHumanPlayer());
+		allPlayers.addAll(board.getCompPlayers());
+		
+		// Check that for each pair of players, the sets
+		// of cards they have are disjoint. This is to ensure
+		// that each card was only dealt once.
+		for (Player playerA : allPlayers) {
+			for (Player playerB : allPlayers) {
+				
+				// Skip this iteration if playerA and playerB are the same player
+				if (playerA.getName().equals(playerB.getName())) {
+					continue;
+				}
+				
+				// Check that playerA and playerB don't have any of the same cards
+				assertTrue(Collections.disjoint(playerA.getMyCards(), playerB.getMyCards()));
+			}
+		}
+		
+		
+		// Check that every card was dealt
+		Set<Card> dealtCards = new HashSet<Card>();
+		for (Player player : allPlayers) {
+			dealtCards.addAll(player.getMyCards());
+		}
+		assertTrue(board.getDeck().equals(dealtCards));
+		
+		
+		// Check that each player has about the same number of cards.
+		// Each player should have either x or x-1 cards.
+		ArrayList<Integer> numCardsPerPlayer = new ArrayList<Integer>();
+		for (Player player : allPlayers) {
+			numCardsPerPlayer.add(player.getMyCards().size());
+		}
+		assertTrue(numCardsPerPlayer.size() == 2);
+		assertTrue(Math.abs(numCardsPerPlayer.get(0) - numCardsPerPlayer.get(1)) == 1);
 	}
 
 }
