@@ -58,6 +58,9 @@ public class Board {
 	}
 
 	public void initialize() {
+		
+		cardDeck = new HashSet<Card>();
+		
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
@@ -115,18 +118,49 @@ public class Board {
 				throw new BadConfigFormatException("Bad people file format"); 
 			}
 		}
+		
+		// Add the people to the card deck
+		Card tempCard = new Card();
+		tempCard.setType(CardType.PERSON);
+		tempCard.setName(humanPlayer.getName());
+		cardDeck.add(tempCard);
+		
+		for (ComputerPlayer player : compPlayers) {
+			Card tempCompCard = new Card();
+			tempCompCard.setType(CardType.PERSON);
+			tempCompCard.setName(player.getName());
+			cardDeck.add(tempCompCard);
+		}
 	}
 	
 	public void loadWeaponConfig() throws FileNotFoundException, BadConfigFormatException {
+		FileReader reader = new FileReader(weaponConfigFile);
+		Scanner scanner = new Scanner(reader);
 		
+		while (scanner.hasNextLine()) {
+			Card tempCard = new Card();
+			tempCard.setType(CardType.WEAPON);
+			tempCard.setName(scanner.nextLine());
+			cardDeck.add(tempCard);
+		}
 	}
 	
 	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException {
 		FileReader reader = new FileReader(roomConfigFile);
 		Scanner in = new Scanner(reader);
 		Map<Character, String> tempRooms = new HashMap<Character, String>();
+		
+		boolean isCard = true;
+		
 		while (in.hasNextLine()){
 			String value = in.nextLine();
+			
+			if (value.charAt(value.length() - 1) == 'd') {
+				isCard = true;
+			} else {
+				isCard = false;
+			}
+			
 			value = value.replace(", ", " ");
 			value = value.replace(",", "");
 			int lastSpot = value.lastIndexOf(" "); // get rid of card
@@ -141,6 +175,13 @@ public class Board {
 			scan.close();
 			put = put.trim();
 			tempRooms.put(key, put);
+			
+			if (isCard) {
+				Card tempCard = new Card();
+				tempCard.setType(CardType.ROOM);
+				tempCard.setName(put);
+				cardDeck.add(tempCard);
+			}
 		}
 		rooms = tempRooms;
 		in.close();

@@ -112,21 +112,24 @@ public class GameSetupTests {
 		boolean roomFound = false;
 		
 		for (Card card : deck) {
-			if (card.getCardType() == CardType.PERSON &&
-				card.getCardName() == "John Smith") {
+			System.out.println(card.getCardType() + " " + card.getCardName());
+			if (card.getCardType().equals(CardType.PERSON) &&
+				card.getCardName().equals("John Smith")) {
 				personFound = true;
 			}
-			if (card.getCardType() == CardType.WEAPON &&
-				card.getCardName() == "Hammer") {
+			if (card.getCardType().equals(CardType.WEAPON) &&
+				card.getCardName().equals("Hammer")) {
 				weaponFound = true;
 			}
-			if (card.getCardType() == CardType.ROOM &&
-				card.getCardName() == "Game Room") {
+			if (card.getCardType().equals(CardType.ROOM) &&
+				card.getCardName().equals("Game room")) {
 				roomFound = true;
 			}
 		}
 		
-		assertTrue(personFound && weaponFound && roomFound);
+		assertTrue(personFound);
+		assertTrue(weaponFound);
+		assertTrue(roomFound);
 	}
 
 }

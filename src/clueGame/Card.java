@@ -11,4 +11,12 @@ public class Card {
 	public String getCardName() {
 		return cardName;
 	}
+	
+	public void setName(String name) {
+		cardName = name;
+	}
+	
+	public void setType(CardType type) {
+		cardType = type;
+	}
 }
