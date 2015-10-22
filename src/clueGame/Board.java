@@ -22,6 +22,8 @@ public class Board {
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 
+	private Solution theAnswer;
+	
 	public Board() { //default constructor
 		super();
 		this.boardConfigFile = "Layout.csv";
@@ -38,11 +40,36 @@ public class Board {
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
+			
+			// Not implemented yet
+			//loadPeopleConfig();
+			//loadCardConfig();
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found. " + e.getMessage());
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	public void selectAnswer() {
+		
+	}
+	
+	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {
+		return new Card();
+	}
+	
+	public boolean checkAccusation(Solution accusation) {
+		return false;
+	}
+	
+	public void loadPeopleConfig() throws FileNotFoundException, BadConfigFormatException {
+		
+	}
+	
+	public void loadCardConfig() throws FileNotFoundException, BadConfigFormatException {
+		
 	}
 	
 	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException {
