@@ -9,7 +9,7 @@ public class Player {
 	private Color color;
 
 	public Card disproveSuggestion(Solution suggestion) {
-		
+		return new Card();
 	}
 	
 	
