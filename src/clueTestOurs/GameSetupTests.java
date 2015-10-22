@@ -62,7 +62,7 @@ public class GameSetupTests {
 				assertEquals(player.getRow(), 10);
 				assertEquals(player.getCol(), 7);
 				break;
-			case "Grrant Jones":
+			case "Grant Jones":
 				assertEquals(player.getColor(), Color.orange);
 				assertEquals(player.getRow(), 12);
 				assertEquals(player.getCol(), 2);
@@ -70,7 +70,7 @@ public class GameSetupTests {
 			default:
 				// The name should be one of the names listed above. If it
 				// is not, the test fails.
-				assertEquals(1, 0);	
+				assertEquals(1, 0);
 			}
 		}
 	}

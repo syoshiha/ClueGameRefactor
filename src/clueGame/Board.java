@@ -19,6 +19,8 @@ public class Board {
 	private Set<ComputerPlayer> compPlayers;
 	private String boardConfigFile;
 	private String roomConfigFile;
+	private String peopleConfigFile;
+	private String weaponConfigFile;
 	
 	private Map<BoardCell, LinkedList<BoardCell>> adjMatrix;
 	private Set<BoardCell> visited;
@@ -26,16 +28,32 @@ public class Board {
 
 	private Solution theAnswer;
 	
-	public Board() { //default constructor
+	// Default constructor
+	public Board() { 
 		super();
 		this.boardConfigFile = "Layout.csv";
 		this.roomConfigFile = "Legend.txt";
-		}
-
-	public Board(String boardConfigFile, String roomConfigFile) { //constructor with board and room files passed in for testing with other files
+		this.peopleConfigFile = "Players.txt";
+		this.weaponConfigFile = "Weapons.txt";
+	}
+	
+	// Constructor used for first set of unit tests. Parameterized for board and room
+	// files. Other files use default values
+	public Board(String boardConfigFile, String roomConfigFile) {
 		super();
 		this.boardConfigFile = boardConfigFile;
 		this.roomConfigFile = roomConfigFile;
+		this.peopleConfigFile = "Players.txt";
+		this.weaponConfigFile = "Weapons.txt";
+	}
+	
+	// Constructor parameterized for all four files
+	public Board(String boardConfigFile, String roomConfigFile, String peopleConfigFile, String weaponConfigFile) {
+		super();
+		this.boardConfigFile = boardConfigFile;
+		this.roomConfigFile = roomConfigFile;
+		this.peopleConfigFile = peopleConfigFile;
+		this.weaponConfigFile = weaponConfigFile;
 	}
 
 	public void initialize() {
@@ -65,7 +83,37 @@ public class Board {
 	}
 	
 	public void loadPeopleConfig() throws FileNotFoundException, BadConfigFormatException {
+		FileReader reader = new FileReader(peopleConfigFile);
+		Scanner scanner = new Scanner(reader);
+		humanPlayer = new HumanPlayer();
+		compPlayers = new HashSet<ComputerPlayer>();
+		ComputerPlayer tempPlayer;
 		
+		String temp = "";
+		
+		try {
+			humanPlayer.setName(scanner.nextLine());
+			humanPlayer.setColor(scanner.nextLine());
+			humanPlayer.setRow(Integer.parseInt(scanner.next()));
+			humanPlayer.setCol(Integer.parseInt(scanner.next()));
+			scanner.nextLine(); // Flush rest of line
+		} catch (Exception e) {
+			throw new BadConfigFormatException("Bad people file format");
+		}
+		
+		while (scanner.hasNextLine()) {
+			try {
+				tempPlayer = new ComputerPlayer();
+				tempPlayer.setName(scanner.nextLine());
+				tempPlayer.setColor(scanner.nextLine());
+				tempPlayer.setRow(Integer.parseInt(scanner.next()));
+				tempPlayer.setCol(Integer.parseInt(scanner.next()));
+				if (scanner.hasNextLine()) scanner.nextLine(); // Flush rest of line
+				compPlayers.add(tempPlayer);
+			} catch (Exception e) {
+				throw new BadConfigFormatException("Bad people file format"); 
+			}
+		}
 	}
 	
 	public void loadWeaponConfig() throws FileNotFoundException, BadConfigFormatException {
