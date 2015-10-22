@@ -15,5 +15,19 @@ public class Player {
 		return new Card();
 	}
 	
+	public String getName() {
+		return playerName;
+	}
 	
+	public Color getColor() {
+		return color;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+	
+	public int getCol() {
+		return column;
+	}
 }

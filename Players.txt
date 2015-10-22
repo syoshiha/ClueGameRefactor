@@ -1,6 +1,18 @@
 John Smith
+red
+3 9
 Joe Brown
+blue
+8 17
 Bill Adams
+cyan
+19 19
 Jake Williams
+green
+14 7
 Connor Davis
+yellow
+10 7
 Grant Jones
+orange
+12 2

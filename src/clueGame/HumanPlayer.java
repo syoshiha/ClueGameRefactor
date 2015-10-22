@@ -1,5 +1,7 @@
 package clueGame;
 
-public class HumanPlayer {
+import com.sun.prism.paint.Color;
 
+public class HumanPlayer extends Player {
+	
 }

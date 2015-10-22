@@ -15,6 +15,8 @@ public class Board {
 	public static final int BOARD_SIZE = 5;
 	private BoardCell[][] board;
 	private static Map<Character, String> rooms;
+	private HumanPlayer humanPlayer;
+	private Set<ComputerPlayer> compPlayers;
 	private String boardConfigFile;
 	private String roomConfigFile;
 	
@@ -40,10 +42,8 @@ public class Board {
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
-			
-			// Not implemented yet
-			//loadPeopleConfig();
-			//loadCardConfig();
+			loadPeopleConfig();
+			loadWeaponConfig();
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found. " + e.getMessage());
@@ -68,7 +68,7 @@ public class Board {
 		
 	}
 	
-	public void loadCardConfig() throws FileNotFoundException, BadConfigFormatException {
+	public void loadWeaponConfig() throws FileNotFoundException, BadConfigFormatException {
 		
 	}
 	
@@ -286,5 +286,12 @@ public class Board {
 		return targets;
 	}
 	
+	public HumanPlayer getHumanPlayer() {
+		return humanPlayer;
+	}
+	
+	public Set<ComputerPlayer> getCompPlayers() {
+		return compPlayers;
+	}
 }
 
