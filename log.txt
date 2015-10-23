@@ -1,3 +1,169 @@
+REPOSITORY: https://github.com/syoshiha/ClueGameExp
+
+Note: We did this assignment in pairs working on one computer. Most
+of the commits come from one account, but we worked on everything
+together.
+
+
+
+commit 1793db3e49a1220f98608f0cc75e1a1f258200b1
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Fri Oct 23 09:53:47 2015 -0600
+
+    Ignored log file
+
+commit 98531378ca4a3e2449b53f869664a7143fb44b7c
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Fri Oct 23 09:51:43 2015 -0600
+
+    Added more clear documentation
+
+commit fe15ac815edbdfd75443cbf5e1c6a559a012f823
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Fri Oct 23 09:43:43 2015 -0600
+
+    Fixed makeAccusation() in ComputerPlayer so that an accusation will be made only if there is one of each card type that the computer has not seen
+
+commit fd9cd889d04fa5fb3f98f4b333629601d571d859
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Fri Oct 23 09:22:34 2015 -0600
+
+    Made accusation making tests pass by implementing checkAccusation in Board and makeAccusation in ComputerPlayer.
+
+commit e9c6a212835b9c66c83ec15fc4b9a13703867186
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Fri Oct 23 08:51:24 2015 -0600
+
+    Added failing test for making an accusation.
+
+commit b2faf3ffde0fb608653e7ec10bdae21ed6c2ce4b
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 20:57:35 2015 -0600
+
+    Fixed the deal cards function so that it does not deal cards that are in the solution
+
+commit 815d5f67f814f97b62295cb325bb08f3c8150330
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 17:45:25 2015 -0600
+
+    Implemented dealCards() to make the tests for card dealing pass
+
+commit 8e380384f98ebe6e4c74f0fa512a711ffe4b6c0f
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 17:25:38 2015 -0600
+
+    Added failing tests for card dealing
+
+commit 2f79c18185c7549cb0cce4f61b554306ce285949
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 16:54:12 2015 -0600
+
+    Implemented functions to load the deck of cards to make the card loading tests pass
+
+commit f947b5e47d1af518aeba907bdd761432225ff655
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 16:15:19 2015 -0600
+
+    Added failing tests for loading the card deck
+
+commit d6d7c00149af9d1fad3ea56539ef10531eadbba3
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 15:32:43 2015 -0600
+
+    Implemented function to load people from a file and create the human and computer players. The test for this function now passes
+
+commit a6d32e80c3b72fad30a1ec0613d6aa07f351219b
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 14:45:57 2015 -0600
+
+    Added test for ensuring the correct number of people are loaded, and that they each have the correct name, color, and starting location
+
+commit b8e1440446372e919e0f71f84502a253ef5098e6
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 11:56:35 2015 -0600
+
+    Added @Before to GameSetupTests
+
+commit 90ca2d39d046831124da320819ddb8b5f0e1470a
+Author: syoshiha <syoshiha@mymail.mines.edu>
+Date:   Thu Oct 22 11:55:34 2015 -0600
+
+    Created Players and Weapons files
+
+commit aed0d0a9c06deecb29bc327c6a21272a933428b5
+Merge: e7f9413 1fc6f5a
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 11:41:09 2015 -0600
+
+    Merge branch 'master' of https://github.com/syoshiha/ClueGameExp
+
+commit 1fc6f5a0d83094745877470c817ae95bf8ffa09b
+Author: syoshiha <syoshiha@mymail.mines.edu>
+Date:   Thu Oct 22 11:40:45 2015 -0600
+
+    Created the GameSetupTests class
+
+commit e7f941325689962b4b06b2fbb151ea6145ae4c4f
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 11:39:45 2015 -0600
+
+    Added GameActionTests file
+
+commit b11ab3b4ad4b9e93c97cda2d1d0256149d17cfdd
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 11:34:28 2015 -0600
+
+    Added myCards and seenCards to Player class
+
+commit c175e6ce06eb8d1b45fd2fb1d47801f04ccb9ea5
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 11:31:53 2015 -0600
+
+    Added return statement to disproveSuggestion()
+
+commit 8dba037e75e56e628a61ff56992a449404bb5c16
+Merge: 2cc05ef 22039d1
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 11:29:42 2015 -0600
+
+    Merge branch 'master' of https://github.com/syoshiha/ClueGameExp
+
+commit 22039d1fb9e42f98e1858fe3ca86ee355efeeb1f
+Author: syoshiha <syoshiha@mymail.mines.edu>
+Date:   Thu Oct 22 11:29:21 2015 -0600
+
+    Created variables and functions within Player and Computer Player classes
+
+commit 2cc05ef113032cf8312612bcaba6149c9d1d3c17
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 11:28:57 2015 -0600
+
+    Added variables and skeleton functions to Solution, Board, CardType, and Card
+
+commit 37c707902f6144e8778881049d78c851d69910d9
+Author: erikkacsm <ebaker@mymail.mines.edu>
+Date:   Thu Oct 22 11:06:26 2015 -0600
+
+    Added skeleton classes for Clue Players
+
+	
+	
+============= THE FOLLOWING COMMITS WERE DONE BEFORE THE CODE SWAP ============
+	
+	
+	
+commit a5f8849763f91ae77e503465e627cd14d958f2a8
+Author: Jason Ziolo <jziolo@mymail.mines.edu>
+Date:   Tue Oct 13 19:46:23 2015 -0600
+
+    changed out test excel file
+
+commit beea80ddf699914ed0fded96ae0c2578ff8b00a0
+Author: HelluvaEnginerd <haydenscott573@gmail.com>
+Date:   Tue Oct 13 19:43:39 2015 -0600
+
+    excel file updated
+
 commit 3454bda017a4fc44be558b39e54d0a24d398b9ae
 Author: HelluvaEnginerd <haydenscott573@gmail.com>
 Date:   Tue Oct 13 19:38:16 2015 -0600
