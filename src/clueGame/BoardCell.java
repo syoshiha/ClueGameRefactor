@@ -10,7 +10,12 @@ public class BoardCell {
 	public static final char WALKWAY_INITIAL = 'W';
 	//public static final char CLOSET_INITIAL = 'X';
 	
+	public BoardCell() {
+		super();
+	}
+	
 	public BoardCell(int row, int column, char initial, DoorDirection doorDirection) {
+		super();
 		this.row = row;
 		this.column = column;
 		this.initial = initial;
@@ -44,5 +49,13 @@ public class BoardCell {
 
 	public char getInitial() {
 		return initial;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+	
+	public int getCol() {
+		return column;
 	}
 }

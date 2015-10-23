@@ -2,6 +2,7 @@ package clueTestOurs;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.ComputerPlayer;
 import clueGame.Solution;
@@ -77,6 +79,60 @@ Board board;
 				}
 				assertTrue(board.checkAccusation(player.makeAccusation()));
 			}
+		}
+	}
+	
+	@Test
+	// This test ensures that:
+	// - If a room is a target it is chosen.
+	// - If a room is a target that we visited recently, a target is chosen randomly.
+	// - That random selection is in fact random.
+	public void testTargetSelection() {
+		// Ensure that a room is chosen if it is in the list of targets and 
+		// was not the last visited room. The following test places the player
+		// close to a room, and makes sure that the player enters the room. 
+		board.calcTargets(17, 6, 3);
+		for (int i=0; i<20; i++) { // Make sure the room was not entered by luck.
+			ComputerPlayer testPlayer = new ComputerPlayer();
+			testPlayer.setRow(17);
+			testPlayer.setCol(6);
+			assertTrue(testPlayer.pickLocation(board.getTargets()).getInitial() == 'S');
+		}
+		
+		// Now that this room been visited, repeat the same test as above,
+		// but make sure that ALL targets are chosen randomly.
+		int[] timesHitEachTarget = new int[5];
+		for (int i=0; i<5; i++) {
+			timesHitEachTarget[i] = 0;
+		}
+		
+		for (int i=0; i<500; i++) {
+			ComputerPlayer testPlayer = new ComputerPlayer();
+			testPlayer.setRow(17);
+			testPlayer.setCol(6);
+			BoardCell chosenTarget = testPlayer.pickLocation(board.getTargets());
+			
+			// Test 5 of the possible targets to make sure they are all visited.
+			if (chosenTarget.getRow() == 14 && chosenTarget.getCol() == 6) {
+				timesHitEachTarget[0]++;
+			}
+			if (chosenTarget.getRow() == 18 && chosenTarget.getCol() == 8) {
+				timesHitEachTarget[1]++;
+			}
+			if (chosenTarget.getRow() == 17 && chosenTarget.getCol() == 4) {
+				timesHitEachTarget[2]++;
+			}
+			if (chosenTarget.getRow() == 17 && chosenTarget.getCol() == 7) {
+				timesHitEachTarget[3]++;
+			}
+			if (chosenTarget.getRow() == 19 && chosenTarget.getCol() == 5) {
+				timesHitEachTarget[4]++;
+			}
+		}
+		
+		// Make sure each target was hit at least 5 times.
+		for (int i=0; i<5; i++) {
+			assertTrue(timesHitEachTarget[i] >= 5);
 		}
 	}
 }

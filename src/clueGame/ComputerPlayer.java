@@ -4,8 +4,17 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player {
 	
-	public void pickLocation(Set <BoardCell> targets) {
+	char lastRoomVisited;
+	
+	public BoardCell pickLocation(Set<BoardCell> targets) {
+		// If the list of targets includes a room, select that
+		// unless it was the last room we visited.
 		
+		// Otherwise, chose a target randomly.
+		
+		// Call calcTargets from within this function.
+		
+		return new BoardCell();
 	}
 	
 	// Returns either the accusation, or null if an accusation couldn't be made.
