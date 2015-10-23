@@ -184,17 +184,14 @@ public class GameActionTests {
 		assertEquals(testPlayer.disproveSuggestion(new Solution("Connor Davis", "Study", "Axe")), null);
 		assertEquals(testPlayer.disproveSuggestion(new Solution("Connor Davis", "Study", "Axe")), null);
 		
-		// Test disproving a solution when three possible cards could be used. Make sure
+		// Test disproving a solution when two possible cards could be used. Make sure
 		// that each card is used at least five times after 500 calls to disproveSuggestion().
-		int numTimesDisprovedWithGun = 0;
 		int numTimesDisprovedWithSmith = 0;
 		int numTimesDisprovedWithKitchen = 0;
 		for (int i=0; i<500; i++) {
-			Card cardUsed = testPlayer.disproveSuggestion(new Solution("John Smith", "Kitchen", "Gun"));
+			Card cardUsed = testPlayer.disproveSuggestion(new Solution("John Smith", "Kitchen", "Crossbow"));
 			if (cardUsed.getCardName() == "John Smith") {
 				numTimesDisprovedWithSmith++;
-			} else if (cardUsed.getCardName() == "Gun") {
-				numTimesDisprovedWithGun++;
 			} else if (cardUsed.getCardName() == "Kitchen") {
 				numTimesDisprovedWithKitchen++;
 			} else {
@@ -202,7 +199,6 @@ public class GameActionTests {
 				assertTrue(false);
 			}
 		}
-		assertTrue(numTimesDisprovedWithGun >= 5);
 		assertTrue(numTimesDisprovedWithSmith >= 5);
 		assertTrue(numTimesDisprovedWithKitchen >= 5);
 		
@@ -248,6 +244,7 @@ public class GameActionTests {
 		
 		// Test a suggestion that only the accuser can disprove (comp 3)
 		assertEquals(board.handleSuggestion(new Solution("Grant Jones", "Balcony", "Mace"), cps.get(2).getName()), null);
+		
 		
 		// Make sure the players are queried in the proper order. The proper order/cycle is:
 		// 1. The human player

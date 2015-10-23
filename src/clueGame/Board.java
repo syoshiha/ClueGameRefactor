@@ -110,7 +110,6 @@ public class Board {
 			if (startedCycle) {
 				disprovingCard = player.disproveSuggestion(suggestion);
 				if (disprovingCard != null) {
-					System.out.println("A" + disprovingCard.getCardName());
 					return disprovingCard;
 				}
 			}
@@ -123,7 +122,6 @@ public class Board {
 		if (accuserIsHuman) return null;
 		disprovingCard = humanPlayer.disproveSuggestion(suggestion);
 		if (disprovingCard != null) {
-			System.out.println("B" + disprovingCard.getCardName());
 			return disprovingCard;
 		}
 		for (ComputerPlayer player : compPlayers) {
@@ -132,7 +130,6 @@ public class Board {
 			}
 			disprovingCard = player.disproveSuggestion(suggestion);
 			if (disprovingCard != null) {
-				System.out.println("C" + disprovingCard.getCardName());
 				return disprovingCard;
 			}
 		}
