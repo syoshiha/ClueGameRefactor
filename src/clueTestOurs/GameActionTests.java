@@ -8,17 +8,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
+import clueGame.Player;
 import clueGame.Solution;
 
 public class GameActionTests {
 	
-Board board;
+	Board board;
+	Card gunCard;
+	Card swordCard;
+	Card smithCard;
+	Card brownCard;
+	Card kitchenCard;
+	Card poolCard;
+	Card bowCard;
+	Card maceCard;
 	
 	@Before
 	public void setup() {
@@ -29,6 +41,16 @@ Board board;
 		// with the data from the config files.
 		// This function also calls dealCards() to deal the cards.
 		board.initialize();
+		
+		// Cards to use for disproveSuggestion tests:
+		gunCard = new Card("Gun", CardType.WEAPON);
+		swordCard = new Card("Sword", CardType.WEAPON);
+		smithCard = new Card("John Smith", CardType.PERSON);
+		brownCard = new Card("Joe Brown", CardType.PERSON);
+		kitchenCard = new Card("Kitchen", CardType.ROOM);
+		poolCard = new Card("Pool", CardType.ROOM);
+		bowCard = new Card("Crossbow", CardType.WEAPON);
+		maceCard = new Card("Mace", CardType.WEAPON);
 	}
 	
 	@Test
@@ -134,5 +156,134 @@ Board board;
 		for (int i=0; i<5; i++) {
 			assertTrue(timesHitEachTarget[i] >= 5);
 		}
+	}
+	
+	@Test
+	public void testDisprovingASuggestion() {
+		Player testPlayer = new Player();
+		testPlayer.giveCard(gunCard);
+		testPlayer.giveCard(swordCard);
+		testPlayer.giveCard(smithCard);
+		testPlayer.giveCard(brownCard);
+		testPlayer.giveCard(kitchenCard);
+		testPlayer.giveCard(poolCard);
+		
+		// Test disproving a suggestion with a person
+		assertEquals(testPlayer.disproveSuggestion(new Solution("John Smith", "Restroom", "Mace")).getCardType(), CardType.PERSON);
+		assertEquals(testPlayer.disproveSuggestion(new Solution("John Smith", "Restroom", "Mace")).getCardName(), "John Smith");
+		
+		// Test disproving a suggestion with a room
+		assertEquals(testPlayer.disproveSuggestion(new Solution("Jake Williams", "Pool", "Hammer")).getCardType(), CardType.ROOM);
+		assertEquals(testPlayer.disproveSuggestion(new Solution("Jake Williams", "Pool", "Hammer")).getCardName(), "Pool");
+		
+		// Test disproving a suggestion with a weapon
+		assertEquals(testPlayer.disproveSuggestion(new Solution("Connor Davis", "Study", "Gun")).getCardType(), CardType.WEAPON);
+		assertEquals(testPlayer.disproveSuggestion(new Solution("Connor Davis", "Study", "Gun")).getCardName(), "Gun");
+		
+		// Test inability to disprove a suggestion
+		assertEquals(testPlayer.disproveSuggestion(new Solution("Connor Davis", "Study", "Axe")), null);
+		assertEquals(testPlayer.disproveSuggestion(new Solution("Connor Davis", "Study", "Axe")), null);
+		
+		// Test disproving a solution when three possible cards could be used. Make sure
+		// that each card is used at least five times after 500 calls to disproveSuggestion().
+		int numTimesDisprovedWithGun = 0;
+		int numTimesDisprovedWithSmith = 0;
+		int numTimesDisprovedWithKitchen = 0;
+		for (int i=0; i<500; i++) {
+			Card cardUsed = testPlayer.disproveSuggestion(new Solution("John Smith", "Kitchen", "Gun"));
+			if (cardUsed.getCardName() == "John Smith") {
+				numTimesDisprovedWithSmith++;
+			} else if (cardUsed.getCardName() == "Gun") {
+				numTimesDisprovedWithGun++;
+			} else if (cardUsed.getCardName() == "Kitchen") {
+				numTimesDisprovedWithKitchen++;
+			} else {
+				// Only the cards above can disprove the solution
+				assertTrue(false);
+			}
+		}
+		assertTrue(numTimesDisprovedWithGun >= 5);
+		assertTrue(numTimesDisprovedWithSmith >= 5);
+		assertTrue(numTimesDisprovedWithKitchen >= 5);
+		
+		
+		// Test that the handleSuggestion function works correctly, and that all
+		// players are queried. A human player and set of comp players are created
+		// to test the function with.
+		HumanPlayer hp = new HumanPlayer();
+		hp.giveCard(gunCard);
+		hp.giveCard(swordCard);
+		hp.setName("Human Player");
+		
+		ArrayList<ComputerPlayer> cps = new ArrayList<ComputerPlayer>();
+		ComputerPlayer tempCP = new ComputerPlayer();
+		tempCP.giveCard(smithCard);
+		tempCP.giveCard(brownCard);
+		tempCP.setName("Comp 1");
+		cps.add(tempCP);
+		
+		tempCP = new ComputerPlayer();
+		tempCP.giveCard(poolCard);
+		tempCP.giveCard(kitchenCard);
+		tempCP.setName("Comp 2");
+		cps.add(tempCP);
+		
+		tempCP = new ComputerPlayer();
+		tempCP.giveCard(bowCard);
+		tempCP.giveCard(maceCard);
+		tempCP.setName("Comp 3");
+		cps.add(tempCP);
+		
+		board.setHumanPlayer(hp);
+		board.setCompPlayer(cps);
+		
+		// Test a suggestion that no players can disprove
+		assertEquals(board.handleSuggestion(new Solution("Grant Jones", "Balcony", "Axe"), hp.getName()), null);
+		
+		// Test a suggestion that only the human can disprove
+		assertEquals(board.handleSuggestion(new Solution("Grant Jones", "Balcony", "Gun"), cps.get(0).getName()).getCardName(), "Gun");
+		
+		// Test a suggestion that only the accuser can disprove (human)
+		assertEquals(board.handleSuggestion(new Solution("Grant Jones", "Balcony", "Sword"), hp.getName()), null);
+		
+		// Test a suggestion that only the accuser can disprove (comp 3)
+		assertEquals(board.handleSuggestion(new Solution("Grant Jones", "Balcony", "Mace"), cps.get(2).getName()), null);
+		
+		// Make sure the players are queried in the proper order. The proper order/cycle is:
+		// 1. The human player
+		// 2. The computer players in order of their name
+		// The computer players go in order of their name because they are stored in a TreeSet.
+		hp = new HumanPlayer();
+		hp.giveCard(gunCard);
+		hp.setName("CCD");
+		
+		cps = new ArrayList<ComputerPlayer>();
+		tempCP = new ComputerPlayer();
+		tempCP.giveCard(smithCard);
+		tempCP.setName("CDD");
+		cps.add(tempCP);
+		
+		tempCP = new ComputerPlayer();
+		tempCP.giveCard(poolCard);
+		tempCP.setName("CCC");
+		cps.add(tempCP);
+		
+		tempCP = new ComputerPlayer();
+		tempCP.giveCard(bowCard);
+		tempCP.setName("ABB");
+		cps.add(tempCP);
+		
+		board.setHumanPlayer(hp);
+		board.setCompPlayer(cps);
+		
+		// Test suggestion that multiple players can disprove. Ensure first alphabetical
+		// player is the one to disprove
+		assertEquals(board.handleSuggestion(new Solution("John Smith", "Pool", "Crossbow"), hp.getName()).getCardName(), "Crossbow");
+		
+		// Ensure the entire "cycle" of players are queried by making the
+		// last computer player the accuser, and the second to last computer player
+		// the disprover.
+		assertEquals(board.handleSuggestion(new Solution("Connor Davis", "Pool", "Sword"), cps.get(0).getName()).getCardName(), "Crossbow");
+		
 	}
 }

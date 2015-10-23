@@ -11,6 +11,12 @@ public class Solution {
 		weapon = "";
 	}
 	
+	public Solution(String person, String room, String weapon) {
+		this.person = person;
+		this.room = room;
+		this.weapon = weapon;
+	}
+	
 	public boolean equals(Solution otherSolution) {
 		if (this.person.equals(otherSolution.person) &&
 			this.room.equals(otherSolution.room) &&

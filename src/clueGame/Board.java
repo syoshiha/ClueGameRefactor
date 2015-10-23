@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Board {
 	private int numRows;
@@ -86,7 +87,7 @@ public class Board {
 		dealCards();
 	}
 	
-	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {
+	public Card handleSuggestion(Solution suggestion, String accusingPlayer) {
 		return new Card();
 	}
 	
@@ -100,7 +101,7 @@ public class Board {
 		FileReader reader = new FileReader(peopleConfigFile);
 		Scanner scanner = new Scanner(reader);
 		humanPlayer = new HumanPlayer();
-		compPlayers = new HashSet<ComputerPlayer>();
+		compPlayers = new TreeSet<ComputerPlayer>();
 		ComputerPlayer tempPlayer;
 		
 		String temp = "";
@@ -458,6 +459,18 @@ public class Board {
 	
 	public Solution getAnswer() {
 		return theAnswer;
+	}
+	
+	
+	// These functions allow us to deal custom cards to the players
+	// for our JUnit tests.
+	public void setHumanPlayer(HumanPlayer hp) {
+		humanPlayer = hp;
+	}
+	
+	public void setCompPlayer(ArrayList<ComputerPlayer> cp) {
+		compPlayers.clear();
+		compPlayers.addAll(cp);
 	}
 }
 

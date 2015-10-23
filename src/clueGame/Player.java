@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Player {
+public class Player implements Comparable<Player> {
 	private String playerName;
 	private int row;
 	private int column;
@@ -75,5 +75,9 @@ public class Player {
 	
 	public void showCard(Card card) {
 		seenCards.add(card);
+	}
+	
+	public int compareTo(Player otherPlayer) {
+		return this.playerName.compareTo(otherPlayer.playerName);
 	}
 }
