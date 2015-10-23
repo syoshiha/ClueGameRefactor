@@ -1,20 +1,31 @@
 package clueGame;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 
 public class ComputerPlayer extends Player {
 	
-	char lastRoomVisited;
+	char lastRoomChosen;
 	
+	// This function simply selects a target and keeps track of the last
+	// room chosen. it does not actually MOVE the player to the chosen
+	// location.
 	public BoardCell pickLocation(Set<BoardCell> targets) {
-		// If the list of targets includes a room, select that
-		// unless it was the last room we visited.
+
+		// Look for room targets
+		for (BoardCell cell : targets) {
+			if (cell.isRoom() && cell.getInitial() != lastRoomChosen) {
+				lastRoomChosen = cell.getInitial();
+				return cell;
+			}
+		}
 		
-		// Otherwise, chose a target randomly.
-		
-		// Call calcTargets from within this function.
-		
-		return new BoardCell();
+		// Room target not found -> select target randomly
+		ArrayList<BoardCell> shuffledTargets = new ArrayList<BoardCell>();
+		shuffledTargets.addAll(targets);
+		Collections.shuffle(shuffledTargets);
+		return shuffledTargets.get(0);
 	}
 	
 	// Returns either the accusation, or null if an accusation couldn't be made.

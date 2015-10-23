@@ -92,8 +92,9 @@ Board board;
 		// was not the last visited room. The following test places the player
 		// close to a room, and makes sure that the player enters the room. 
 		board.calcTargets(17, 6, 3);
+		ComputerPlayer testPlayer = new ComputerPlayer();
 		for (int i=0; i<20; i++) { // Make sure the room was not entered by luck.
-			ComputerPlayer testPlayer = new ComputerPlayer();
+			testPlayer = new ComputerPlayer();
 			testPlayer.setRow(17);
 			testPlayer.setCol(6);
 			assertTrue(testPlayer.pickLocation(board.getTargets()).getInitial() == 'S');
@@ -107,7 +108,6 @@ Board board;
 		}
 		
 		for (int i=0; i<500; i++) {
-			ComputerPlayer testPlayer = new ComputerPlayer();
 			testPlayer.setRow(17);
 			testPlayer.setCol(6);
 			BoardCell chosenTarget = testPlayer.pickLocation(board.getTargets());
