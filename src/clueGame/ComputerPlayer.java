@@ -8,8 +8,8 @@ public class ComputerPlayer extends Player {
 		
 	}
 	
-	public void makeAccusation() {
-		
+	public Solution makeAccusation() {
+		return new Solution();
 	}
 	
 	public void makeSuggestion(Board board, BoardCell location) {

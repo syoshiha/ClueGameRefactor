@@ -88,6 +88,7 @@ public class Board {
 		return new Card();
 	}
 	
+	// Returns true only if the accusation was correct
 	public boolean checkAccusation(Solution accusation) {
 		return false;
 	}
