@@ -54,14 +54,14 @@ Board board;
 						Solution tempSolution = new Solution();
 						tempSolution.person = cardA.getCardName();
 						tempSolution.weapon = cardB.getCardName();
-						tempSolution.room = cardB.getCardName();
+						tempSolution.room = cardC.getCardName();
 						if (board.checkAccusation(tempSolution)) {
 							numCorrectGuesses++;
 						}
 					}
 				}
 			}
-			
+
 			// Make sure that only the correct solution was considered
 			// correct, and all other solutions were considered wrong.
 			assertEquals(numCorrectGuesses, 1);

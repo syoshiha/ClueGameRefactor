@@ -17,7 +17,9 @@ public class Board {
 	public static final int BOARD_SIZE = 5;
 	private BoardCell[][] board;
 	private static Map<Character, String> rooms;
-	private Set<Card> cardDeck;
+	static private Set<Card> cardDeck; // This is static because there will only
+									   // one card deck associated with each game.
+
 	private HumanPlayer humanPlayer;
 	private Set<ComputerPlayer> compPlayers;
 	private String boardConfigFile;
@@ -90,7 +92,7 @@ public class Board {
 	
 	// Returns true only if the accusation was correct
 	public boolean checkAccusation(Solution accusation) {
-		return false;
+		return this.theAnswer.equals(accusation);
 	}
 	
 	public void loadPeopleConfig() throws FileNotFoundException, BadConfigFormatException {
@@ -445,7 +447,7 @@ public class Board {
 		return compPlayers;
 	}
 	
-	public Set<Card> getDeck() {
+	static public Set<Card> getDeck() {
 		return cardDeck;
 	}
 	

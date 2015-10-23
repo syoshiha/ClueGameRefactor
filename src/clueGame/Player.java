@@ -11,8 +11,9 @@ public class Player {
 	private int column;
 	private Color color;
 	
-	private Set<Card> myCards;
-	private Set<Card> seenCards;
+	// Protected so that the children classes can access them.
+	protected Set<Card> myCards;
+	protected Set<Card> seenCards;
 
 	public Player() {
 		myCards = new HashSet<Card>();

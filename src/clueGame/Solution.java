@@ -10,4 +10,13 @@ public class Solution {
 		room = "";
 		weapon = "";
 	}
+	
+	public boolean equals(Solution otherSolution) {
+		if (this.person.equals(otherSolution.person) &&
+			this.room.equals(otherSolution.room) &&
+			this.weapon.equals(otherSolution.weapon)) {
+			return true;
+		}
+		return false;
+	}
 }
