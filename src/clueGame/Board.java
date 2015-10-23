@@ -92,6 +92,7 @@ public class Board {
 	
 	// Returns true only if the accusation was correct
 	public boolean checkAccusation(Solution accusation) {
+		if (accusation == null) return false;
 		return this.theAnswer.equals(accusation);
 	}
 	
