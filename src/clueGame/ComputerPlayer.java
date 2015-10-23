@@ -8,13 +8,14 @@ public class ComputerPlayer extends Player {
 		
 	}
 	
+	// Returns either the accusation, or null if an accusation couldn't be made.
 	public Solution makeAccusation() {
 		
 		Set<Card> cardsNotSeen = Board.getDeck();
 		cardsNotSeen.removeAll(seenCards);
 		
-		// The computer doesn't make a guess if it doesn't have enough information
-		// The computer will make a guess once there is only one of each card type
+		// The computer doesn't make an accusation if it doesn't have enough information.
+		// The computer will make an accusation once there is only one of each card type
 		// left that it has not seen.
 		int peopleLeft = 0;
 		int roomsLeft = 0;
@@ -34,6 +35,7 @@ public class ComputerPlayer extends Player {
 			}
 		}
 		
+		// Computer couldn't make accusation
 		if (peopleLeft > 1 || roomsLeft > 1 || weaponsLeft > 1) {
 			return null;
 		}
