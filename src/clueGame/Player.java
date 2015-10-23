@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +23,18 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public Card disproveSuggestion(Solution suggestion) {
-		return new Card();
+		ArrayList<Card> possibleCards = new ArrayList<Card>();
+		for (Card card : myCards) {
+			if (card.getCardName() == suggestion.person ||
+				card.getCardName() == suggestion.room ||
+				card.getCardName() == suggestion.weapon) {
+					possibleCards.add(card);
+			}
+		}
+		
+		Collections.shuffle(possibleCards);
+		if (possibleCards.size() == 0) return null;
+		return possibleCards.get(0);
 	}
 	
 	public String getName() {

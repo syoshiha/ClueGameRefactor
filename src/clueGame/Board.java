@@ -88,7 +88,57 @@ public class Board {
 	}
 	
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer) {
-		return new Card();
+		// Find the accusing player object
+		Player accuser = null;
+		boolean accuserIsHuman = false;
+		if (humanPlayer.getName() == accusingPlayer) {
+			accuser = humanPlayer;
+			accuserIsHuman = true;
+		}
+		for (Player player : compPlayers) {
+			if (player.getName() == accusingPlayer) {
+				accuser = player;
+			}
+		}
+		if (accuser == null) return null;
+		
+		// Query players that come after the accuser in the cycle
+		Card disprovingCard;
+		boolean startedCycle = false;
+		if (accuserIsHuman) startedCycle = true;
+		for (ComputerPlayer player : compPlayers) {
+			if (startedCycle) {
+				disprovingCard = player.disproveSuggestion(suggestion);
+				if (disprovingCard != null) {
+					System.out.println("A" + disprovingCard.getCardName());
+					return disprovingCard;
+				}
+			}
+			if (player.getName() == accuser.getName()) {
+				startedCycle = true;
+			}
+		}
+		
+		// Query players that come before the accuser in the cycle
+		if (accuserIsHuman) return null;
+		disprovingCard = humanPlayer.disproveSuggestion(suggestion);
+		if (disprovingCard != null) {
+			System.out.println("B" + disprovingCard.getCardName());
+			return disprovingCard;
+		}
+		for (ComputerPlayer player : compPlayers) {
+			if (player.getName() == accuser.getName()) {
+				break;
+			}
+			disprovingCard = player.disproveSuggestion(suggestion);
+			if (disprovingCard != null) {
+				System.out.println("C" + disprovingCard.getCardName());
+				return disprovingCard;
+			}
+		}
+		
+		// Return null if none of the players could disprove
+		return null;
 	}
 	
 	// Returns true only if the accusation was correct

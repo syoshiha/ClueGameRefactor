@@ -283,7 +283,7 @@ public class GameActionTests {
 		// Ensure the entire "cycle" of players are queried by making the
 		// last computer player the accuser, and the second to last computer player
 		// the disprover.
-		assertEquals(board.handleSuggestion(new Solution("Connor Davis", "Pool", "Sword"), cps.get(0).getName()).getCardName(), "Crossbow");
+		assertEquals(board.handleSuggestion(new Solution("Connor Davis", "Pool", "Sword"), cps.get(0).getName()).getCardName(), "Pool");
 		
 	}
 }
