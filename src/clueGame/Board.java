@@ -30,6 +30,10 @@ public class Board {
 	private Set<BoardCell> targets;
 
 	private Solution theAnswer;
+	private Set<Card> answerCards; // Set of cards in the solution. This
+								   // variable is mostly useful for testing.
+	
+	
 	
 	// Default constructor
 	public Board() { 
@@ -75,11 +79,9 @@ public class Board {
 			System.out.println(e.getMessage());
 		}
 		
+		theAnswer = new Solution();
+		answerCards = new HashSet<Card>();
 		dealCards();
-	}
-	
-	public void selectAnswer() {
-		
 	}
 	
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {
@@ -231,6 +233,36 @@ public class Board {
 		ArrayList<Card> shuffledCards = new ArrayList<Card>();
 		shuffledCards.addAll(cardDeck);
 		Collections.shuffle(shuffledCards);
+		
+		// Pick a person for the solution
+		for (int i=0; i<shuffledCards.size(); i++) {
+			if (shuffledCards.get(i).getCardType() == CardType.PERSON) {
+				theAnswer.person = shuffledCards.get(i).getCardName();
+				answerCards.add(shuffledCards.get(i));
+				shuffledCards.remove(i);
+				break;
+			}
+		}
+		
+		// Pick a weapon for the solution
+		for (int i=0; i<shuffledCards.size(); i++) {
+			if (shuffledCards.get(i).getCardType() == CardType.WEAPON) {
+				theAnswer.weapon = shuffledCards.get(i).getCardName();
+				answerCards.add(shuffledCards.get(i));
+				shuffledCards.remove(i);
+				break;
+			}
+		}
+		
+		// Pick a room for the solution
+		for (int i=0; i<shuffledCards.size(); i++) {
+			if (shuffledCards.get(i).getCardType() == CardType.ROOM) {
+				theAnswer.room = shuffledCards.get(i).getCardName();
+				answerCards.add(shuffledCards.get(i));
+				shuffledCards.remove(i);
+				break;
+			}
+		}
 		
 		while (!shuffledCards.isEmpty()) {
 			try {
@@ -414,6 +446,14 @@ public class Board {
 	
 	public Set<Card> getDeck() {
 		return cardDeck;
+	}
+	
+	public Set<Card> getAnswerCards() {
+		return answerCards;
+	}
+	
+	public Solution getAnswer() {
+		return theAnswer;
 	}
 }
 

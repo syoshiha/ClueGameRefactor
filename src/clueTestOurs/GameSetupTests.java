@@ -103,7 +103,7 @@ public class GameSetupTests {
 				numWeapons++;
 			} else {
 				// The card type should be one of the types listed above,
-				// otherwise the test should fail.
+				// otherwise the test fails.
 				assertEquals(0, 1);
 			}
 		}
@@ -163,12 +163,17 @@ public class GameSetupTests {
 		}
 		
 		
-		// Check that every card was dealt
+		// Check that every card was dealt (except the cards that
+		// are in the solution)
 		Set<Card> dealtCards = new HashSet<Card>();
 		for (Player player : allPlayers) {
 			dealtCards.addAll(player.getMyCards());
 		}
-		assertTrue(board.getDeck().equals(dealtCards));
+		Set<Card> allCards = new HashSet<Card>();
+		allCards.addAll(board.getDeck());
+		allCards.removeAll(board.getAnswerCards());
+		
+		assertTrue(dealtCards.equals(allCards));
 		
 		
 		// Check that each player has about the same number of cards.
@@ -177,7 +182,7 @@ public class GameSetupTests {
 		for (Player player : allPlayers) {
 			numCardsPerPlayer.add(player.getMyCards().size());
 		}
-		assertEquals(numCardsPerPlayer.size(), 2);
+		assertTrue(numCardsPerPlayer.size() == 2 || numCardsPerPlayer.size() == 1);
 		for (Integer i : numCardsPerPlayer) {
 			assertTrue(i == Collections.max(numCardsPerPlayer) ||
 					   i == Collections.max(numCardsPerPlayer) - 1);
