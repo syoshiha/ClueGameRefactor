@@ -287,12 +287,12 @@ public class GameActionTests {
 	@Test
 	// Test that the computer player makes an appropriate suggestion. An appropriate suggestion:
 	// - Has the room the player is currently in
-	// - Does not have a weapon or person that the player has already seen (unless the
-	//   the player has seen ALL of the weapons or ALL of the people
-	// - 
+	// - Does not have a weapon or person that the player has already seen
 	public void testSuggestionMaking() {
 		
-		// Put the player on the balcony, and show them a set of cards
+		// Put the player on the balcony, and show them a set of cards.
+		// Under these conditions, there are many possible suggestions
+		// that the player could make.
 		ComputerPlayer testPlayer = new ComputerPlayer();
 		testPlayer.showCard(new Card("Kitchen", CardType.ROOM));
 		testPlayer.showCard(new Card("Pool", CardType.ROOM));
@@ -326,8 +326,8 @@ public class GameActionTests {
 			}
 		}
 		
-		// Show the computer all the cards but three, so that only one suggestion is possible
-		// the player will not see: 'Grant Jones', 'Hammer'
+		// Show the computer all but one person and all but one weapon, so that only one
+		// suggestion is possible. The player will NOT see: "Grant Jones", "Hammer".
 		// We need not show them all the rooms, because only one room is possible anyways.
 		testPlayer.showCard(new Card("Jake Williams", CardType.PERSON));
 		testPlayer.showCard(new Card("Connor Davis", CardType.PERSON));
@@ -336,10 +336,7 @@ public class GameActionTests {
 		
 		// Because makeSuggestion is random, test multiple times
 		for (int i=0; i<100; i++) {
-			
 			Solution suggestion = testPlayer.makeSuggestion(board, board.getCellAt(testPlayer.getRow(), testPlayer.getCol()));
-			
-			// Suggestion can only be made from current room
 			assertTrue(suggestion.room.equals("Balcony"));
 			assertTrue(suggestion.person.equals("Grant Jones"));
 			assertTrue(suggestion.weapon.equals("Hammer"));
