@@ -69,24 +69,51 @@ public class ComputerPlayer extends Player {
 		ArrayList<Card> cardsNotSeen = new ArrayList<Card>();
 		
 		entireDeck.addAll(board.getDeck());
-		cardsNotSeen.addAll(board.getDeck());
+		
+		boolean cardHasBeenSeen;
+		for (Card card : entireDeck) {
+			cardHasBeenSeen = false;
+			for (Card seenCard : seenCards) {
+				if (card.getCardName().equals(seenCard.getCardName())) {
+					cardHasBeenSeen = true;
+				}
+			}
+			if (!cardHasBeenSeen) {
+				cardsNotSeen.add(card);
+			}
+		}
 		
 		Collections.shuffle(entireDeck);
 		Collections.shuffle(cardsNotSeen);
-
 		
 		// The player must suggest the room they are currently in
 		Solution suggestion = new Solution();
 		suggestion.room = rooms.get(location.getInitial());
 		
 		// Randomly make suggestion from entire deck
+		for (Card card : entireDeck) {
+			if (card.getCardType() == CardType.PERSON) {
+				suggestion.person = card.getCardName();
+			}
+			if (card.getCardType() == CardType.WEAPON) {
+				suggestion.weapon = card.getCardName();
+			}
+		}
 		
 		// Overwrite previous suggestion with cards that have not been seen.
 		// This ensures that if possible, the suggestion will contain cards
 		// that have not been seen, but if a player has seen all of one type
 		// of card, then they will suggest a card they have seen
+		for (Card card : cardsNotSeen) {
+			if (card.getCardType() == CardType.PERSON) {
+				suggestion.person = card.getCardName();
+			}
+			if (card.getCardType() == CardType.WEAPON) {
+				suggestion.weapon = card.getCardName();
+			}
+		}
 		
-		return new Solution();
+		return suggestion;
 	}
 	
 	public ComputerPlayer() {

@@ -322,6 +322,7 @@ public class GameActionTests {
 				suggestion.weapon.equals("Gun") ||
 				suggestion.weapon.equals("Sword") ||
 				suggestion.weapon.equals("Crossbow")) {
+					System.out.println(suggestion.person + " " + suggestion.weapon + " ");
 					assertTrue(false);
 			}
 		}
