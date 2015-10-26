@@ -64,9 +64,15 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public Solution makeSuggestion(Board board, BoardCell location) {
-		Set<Card> entireDeck = board.getDeck();
-		Set<Card> cardsNotSeen = board.getDeck();
-		cardsNotSeen.removeAll(seenCards);
+		ArrayList<Card> entireDeck = new ArrayList<Card>();
+		ArrayList<Card> cardsNotSeen = new ArrayList<Card>();
+		
+		entireDeck.addAll(board.getDeck());
+		cardsNotSeen.addAll(board.getDeck());
+		
+		Collections.shuffle(entireDeck);
+		Collections.shuffle(cardsNotSeen);
+
 		
 		// The player must suggest the room they are currently in
 		Solution suggestion = new Solution();
