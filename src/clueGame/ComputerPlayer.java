@@ -64,6 +64,20 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public Solution makeSuggestion(Board board, BoardCell location) {
+		Set<Card> entireDeck = board.getDeck();
+		Set<Card> cardsNotSeen = board.getDeck();
+		cardsNotSeen.removeAll(seenCards);
+		
+		// The player must suggest the room they are currently in
+		Solution suggestion = new Solution();
+		
+		// Randomly make suggestion from entire deck
+		
+		// Overwrite previous suggestion with cards that have not been seen.
+		// This ensures that if possible, the suggestion will contain cards
+		// that have not been seen, but if a player has seen all of one type
+		// of card, then they will suggest a card they have seen
+		
 		return new Solution();
 	}
 	
