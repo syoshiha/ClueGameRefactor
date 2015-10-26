@@ -308,7 +308,7 @@ public class GameActionTests {
 		
 		// Because a suggestion is made randomly, we must check it many times
 		for (int i=0; i<500; i++) {
-			Solution suggestion = testPlayer.makeSuggestion(board, board.getCellAt(testPlayer.getRow(), testPlayer.getCol()));
+			Solution suggestion = testPlayer.makeSuggestion(board, board.getCellAt(testPlayer.getRow(), testPlayer.getCol()), board.getRooms());
 			
 			// Suggestion can only be made from the current room
 			assertTrue(suggestion.room.equals("Balcony"));
@@ -336,7 +336,7 @@ public class GameActionTests {
 		
 		// Because makeSuggestion is random, test multiple times
 		for (int i=0; i<100; i++) {
-			Solution suggestion = testPlayer.makeSuggestion(board, board.getCellAt(testPlayer.getRow(), testPlayer.getCol()));
+			Solution suggestion = testPlayer.makeSuggestion(board, board.getCellAt(testPlayer.getRow(), testPlayer.getCol()), board.getRooms());
 			assertTrue(suggestion.room.equals("Balcony"));
 			assertTrue(suggestion.person.equals("Grant Jones"));
 			assertTrue(suggestion.weapon.equals("Hammer"));

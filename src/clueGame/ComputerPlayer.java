@@ -2,6 +2,7 @@ package clueGame;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 
 public class ComputerPlayer extends Player {
@@ -63,7 +64,7 @@ public class ComputerPlayer extends Player {
 		return accusation;
 	}
 	
-	public Solution makeSuggestion(Board board, BoardCell location) {
+	public Solution makeSuggestion(Board board, BoardCell location, Map<Character, String> rooms) {
 		ArrayList<Card> entireDeck = new ArrayList<Card>();
 		ArrayList<Card> cardsNotSeen = new ArrayList<Card>();
 		
@@ -76,6 +77,7 @@ public class ComputerPlayer extends Player {
 		
 		// The player must suggest the room they are currently in
 		Solution suggestion = new Solution();
+		suggestion.room = rooms.get(location.getInitial());
 		
 		// Randomly make suggestion from entire deck
 		
