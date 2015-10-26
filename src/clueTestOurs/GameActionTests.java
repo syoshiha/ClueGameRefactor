@@ -283,4 +283,66 @@ public class GameActionTests {
 		assertEquals(board.handleSuggestion(new Solution("Connor Davis", "Pool", "Sword"), cps.get(0).getName()).getCardName(), "Pool");
 		
 	}
+	
+	@Test
+	// Test that the computer player makes an appropriate suggestion. An appropriate suggestion:
+	// - Has the room the player is currently in
+	// - Does not have a weapon or person that the player has already seen (unless the
+	//   the player has seen ALL of the weapons or ALL of the people
+	// - 
+	public void testSuggestionMaking() {
+		
+		// Put the player on the balcony, and show them a set of cards
+		ComputerPlayer testPlayer = new ComputerPlayer();
+		testPlayer.showCard(new Card("Kitchen", CardType.ROOM));
+		testPlayer.showCard(new Card("Pool", CardType.ROOM));
+		testPlayer.showCard(new Card("Balcony", CardType.ROOM));
+		testPlayer.showCard(new Card("John Smith", CardType.PERSON));
+		testPlayer.showCard(new Card("Joe Brown", CardType.PERSON));
+		testPlayer.showCard(new Card("Bill Adams", CardType.PERSON));
+		testPlayer.showCard(new Card("Gun", CardType.WEAPON));
+		testPlayer.showCard(new Card("Sword", CardType.WEAPON));
+		testPlayer.showCard(new Card("Crossbow", CardType.WEAPON));
+		testPlayer.setRow(11); // Balcony
+		testPlayer.setCol(23);
+		
+		// Because a suggestion is made randomly, we must check it many times
+		for (int i=0; i<500; i++) {
+			Solution suggestion = testPlayer.makeSuggestion(board, board.getCellAt(testPlayer.getRow(), testPlayer.getCol()));
+			
+			// Suggestion can only be made from the current room
+			assertTrue(suggestion.room.equals("Balcony"));
+			
+			// Suggestion should only contain cards that have not been seen
+			if (suggestion.room.equals("Kitchen") ||
+				suggestion.room.equals("Pool") ||
+				suggestion.person.equals("John Smith") ||
+				suggestion.person.equals("Joe Brown") ||
+				suggestion.person.equals("Bill Adams") ||
+				suggestion.weapon.equals("Gun") ||
+				suggestion.weapon.equals("Sword") ||
+				suggestion.weapon.equals("Crossbow")) {
+					assertTrue(false);
+			}
+		}
+		
+		// Show the computer all the cards but three, so that only one suggestion is possible
+		// the player will not see: 'Grant Jones', 'Hammer'
+		// We need not show them all the rooms, because only one room is possible anyways.
+		testPlayer.showCard(new Card("Jake Williams", CardType.PERSON));
+		testPlayer.showCard(new Card("Connor Davis", CardType.PERSON));
+		testPlayer.showCard(new Card("Mace", CardType.WEAPON));
+		testPlayer.showCard(new Card("Axe", CardType.WEAPON));
+		
+		// Because makeSuggestion is random, test multiple times
+		for (int i=0; i<100; i++) {
+			
+			Solution suggestion = testPlayer.makeSuggestion(board, board.getCellAt(testPlayer.getRow(), testPlayer.getCol()));
+			
+			// Suggestion can only be made from current room
+			assertTrue(suggestion.room.equals("Balcony"));
+			assertTrue(suggestion.person.equals("Grant Jones"));
+			assertTrue(suggestion.weapon.equals("Hammer"));
+		}
+	}
 }

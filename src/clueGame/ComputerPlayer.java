@@ -63,8 +63,8 @@ public class ComputerPlayer extends Player {
 		return accusation;
 	}
 	
-	public void makeSuggestion(Board board, BoardCell location) {
-		
+	public Solution makeSuggestion(Board board, BoardCell location) {
+		return new Solution();
 	}
 	
 	public ComputerPlayer() {
