@@ -69,19 +69,8 @@ public class ComputerPlayer extends Player {
 		ArrayList<Card> cardsNotSeen = new ArrayList<Card>();
 		
 		entireDeck.addAll(board.getDeck());
-		
-		boolean cardHasBeenSeen;
-		for (Card card : entireDeck) {
-			cardHasBeenSeen = false;
-			for (Card seenCard : seenCards) {
-				if (card.getCardName().equals(seenCard.getCardName())) {
-					cardHasBeenSeen = true;
-				}
-			}
-			if (!cardHasBeenSeen) {
-				cardsNotSeen.add(card);
-			}
-		}
+		cardsNotSeen.addAll(entireDeck);
+		cardsNotSeen.removeAll(seenCards);
 		
 		Collections.shuffle(entireDeck);
 		Collections.shuffle(cardsNotSeen);
