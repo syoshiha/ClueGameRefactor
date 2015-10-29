@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ public class ClueGame {
 		
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new GridLayout(0, 3));
+		frame.add(controlPanel, BorderLayout.CENTER);
 		
 		// Labels
 		JLabel whoseTurnLabel = new JLabel();
@@ -40,7 +42,7 @@ public class ClueGame {
 		
 		// Buttons
 		JButton nextPlayerButton = new JButton();
-		JButton makeAccusationButtion = new JButton();
+		JButton makeAccusationButton = new JButton();
 		
 		// Panels
 		JPanel whoseTurnPanel = new JPanel();
@@ -49,6 +51,12 @@ public class ClueGame {
 		JPanel guessResultPanel = new JPanel();
 		whoseTurnPanel.add(whoseTurnLabel);
 		whoseTurnPanel.add(whoseTurnText);
+		rollPanel.add(rollLabel);
+		rollPanel.add(rollText);
+		guessPanel.add(guessLabel);
+		guessPanel.add(guessText);
+		guessResultPanel.add(guessResultLabel);
+		guessResultPanel.add(guessResultText);
 		
 		//
 		//
