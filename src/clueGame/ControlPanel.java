@@ -86,9 +86,10 @@ public class ControlPanel extends JPanel {
 		
 		// Set up JFrame window
 		JFrame frame = new JFrame();
-		ControlPanel controlPanel = new ControlPanel();
 		frame.setSize(700, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		ControlPanel controlPanel = new ControlPanel();
 		frame.add(controlPanel, BorderLayout.CENTER);
 		
 		frame.setVisible(true);
