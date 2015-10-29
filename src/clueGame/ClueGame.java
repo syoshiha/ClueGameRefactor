@@ -42,7 +42,18 @@ public class ClueGame {
 		JButton nextPlayerButton = new JButton();
 		JButton makeAccusationButtion = new JButton();
 		
+		// Panels
+		JPanel whoseTurnPanel = new JPanel();
+		JPanel rollPanel = new JPanel();
+		JPanel guessPanel = new JPanel();
+		JPanel guessResultPanel = new JPanel();
+		whoseTurnPanel.add(whoseTurnLabel);
+		whoseTurnPanel.add(whoseTurnText);
 		
+		//
+		//
+		//
+		//
 		
 		
 		frame.setVisible(true);
