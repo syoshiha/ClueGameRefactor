@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ public class ClueGame {
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new GridLayout(0, 3));
 		
+		// Labels
 		JLabel whoseTurnLabel = new JLabel();
 		JLabel rollLabel = new JLabel();
 		JLabel guessLabel = new JLabel();
@@ -26,12 +28,19 @@ public class ClueGame {
 		guessLabel.setText("Guess");
 		guessResultLabel.setText("Guess Result");
 		
+		// Text Fields
 		JTextField whoseTurnText = new JTextField();
 		JTextField rollText = new JTextField();
 		JTextField guessText = new JTextField();
 		JTextField guessResultText = new JTextField();
+		//whoseTurnText.setEditable(false);
+		rollText.setEditable(false);
+		guessText.setEditable(false);
+		guessResultText.setEditable(false);
 		
-		
+		// Buttons
+		JButton nextPlayerButton = new JButton();
+		JButton makeAccusationButtion = new JButton();
 		
 		
 		
