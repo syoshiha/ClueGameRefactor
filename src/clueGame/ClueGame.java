@@ -8,12 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class ClueGame {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.setSize(400, 200);
+		frame.setSize(700, 150);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel controlPanel = new JPanel();
@@ -31,18 +33,18 @@ public class ClueGame {
 		guessResultLabel.setText("Guess Result");
 		
 		// Text Fields
-		JTextField whoseTurnText = new JTextField();
-		JTextField rollText = new JTextField();
-		JTextField guessText = new JTextField();
-		JTextField guessResultText = new JTextField();
-		//whoseTurnText.setEditable(false);
+		JTextField whoseTurnText = new JTextField(10);
+		JTextField rollText = new JTextField(10);
+		JTextField guessText = new JTextField(10);
+		JTextField guessResultText = new JTextField(10);
+		whoseTurnText.setEditable(false);
 		rollText.setEditable(false);
 		guessText.setEditable(false);
 		guessResultText.setEditable(false);
 		
 		// Buttons
-		JButton nextPlayerButton = new JButton();
-		JButton makeAccusationButton = new JButton();
+		JButton nextPlayerButton = new JButton("Next Player");
+		JButton makeAccusationButton = new JButton("Make an Accusation");
 		
 		// Panels
 		JPanel whoseTurnPanel = new JPanel();
@@ -58,19 +60,12 @@ public class ClueGame {
 		guessResultPanel.add(guessResultLabel);
 		guessResultPanel.add(guessResultText);
 		
-		//
-		//
-		//
-		//
-		
-		controlPanel.add(whoseTurnLabel);
+		controlPanel.add(whoseTurnPanel);
 		controlPanel.add(nextPlayerButton);
 		controlPanel.add(makeAccusationButton);
-		controlPanel.add(rollLabel);
-		controlPanel.add(guessLabel);
-		controlPanel.add(guessResultLabel);
-		
-		
+		controlPanel.add(rollPanel);
+		controlPanel.add(guessPanel);
+		controlPanel.add(guessResultPanel);
 		
 		frame.setVisible(true);
 	}
