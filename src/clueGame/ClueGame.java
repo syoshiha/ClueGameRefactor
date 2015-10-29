@@ -63,6 +63,14 @@ public class ClueGame {
 		//
 		//
 		
+		controlPanel.add(whoseTurnLabel);
+		controlPanel.add(nextPlayerButton);
+		controlPanel.add(makeAccusationButton);
+		controlPanel.add(rollLabel);
+		controlPanel.add(guessLabel);
+		controlPanel.add(guessResultLabel);
+		
+		
 		
 		frame.setVisible(true);
 	}
