@@ -1,5 +1,9 @@
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -12,12 +16,14 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Board {
+import javax.swing.JPanel;
+
+public class Board extends JPanel {
 	private int numRows;
 	private int numColumns;
 	public static final int BOARD_SIZE = 5;
 	private BoardCell[][] board;
-	private static Map<Character, String> rooms;
+	public static Map<Character, String> rooms;
 	static private Set<Card> cardDeck; // This is static because there will only
 									   // one card deck associated with each game.
 
@@ -36,7 +42,34 @@ public class Board {
 	private Set<Card> answerCards; // Set of cards in the solution. This
 								   // variable is mostly useful for testing.
 	
-	
+	@Override
+	public void paintComponent(Graphics g) {
+		
+		// Don't draw board if it has not yet been initialized.
+		if (numRows == 0) {
+			return;
+		}
+		
+		for (int i=0; i<numRows; i++) {
+			for (int j=0; j<numColumns; j++) {
+				board[i][j].draw(g);
+			}
+		}
+		
+		// Draw text
+		for (int i=0; i<numRows; i++) {
+			for (int j=0; j<numColumns; j++) {
+				if (board[i][j].hasName()) {
+					g.setColor(Color.BLUE);
+					g.setFont(new Font("Verdana", Font.PLAIN, 12));
+					g.drawString(Board.rooms.get(board[i][j].getInitial()),
+							j*BoardCell.DIMENSIONS + BoardCell.DIMENSIONS/2,
+							i*BoardCell.DIMENSIONS + 3*BoardCell.DIMENSIONS/4);
+				}
+			}
+		}
+		
+	}
 	
 	// Default constructor
 	public Board() { 
@@ -85,6 +118,51 @@ public class Board {
 		theAnswer = new Solution();
 		answerCards = new HashSet<Card>();
 		dealCards();
+		setNamePositions();
+	}
+	
+	
+	// This function determines where to write the name for
+	// each room. It finds the row in each room that has the
+	// most space, and decides to write the name there.
+	public void setNamePositions() {
+		
+		int[][] maxLengths = new int[numRows][];
+		for (int i=0; i<numRows; i++) {
+			maxLengths[i] = new int[numColumns];
+		}
+		
+		for (int i=0; i<numRows; i++) {
+			for (int j=0; j<numColumns; j++) {
+				int offset = 0;
+				for (offset = 0; j+offset < numColumns; offset++) {
+					if (board[i][j+offset].getInitial() != board[i][j].getInitial()) {
+						break;
+					}
+				}
+				maxLengths[i][j] = offset;
+			}
+		}
+		
+		for (Character initial : rooms.keySet()) {
+			int currentRow = -1;
+			int currentColumn = -1;
+			for (int i=0; i<numRows; i++) {
+				for (int j=0; j<numColumns; j++) {
+					if (board[i][j].getInitial() == initial &&
+						(currentRow == -1 ||
+						maxLengths[i][j] > maxLengths[currentRow][currentColumn])) {
+						currentRow = i;
+						currentColumn = j;
+					}
+				}
+			}
+			if (board[currentRow][currentColumn].isRoom()) {
+				board[currentRow][currentColumn].setName(true);
+			}
+		}
+		
+		
 	}
 	
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer) {
