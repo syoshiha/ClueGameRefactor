@@ -60,7 +60,7 @@ public class Board extends JPanel {
 		for (int i=0; i<numRows; i++) {
 			for (int j=0; j<numColumns; j++) {
 				if (board[i][j].hasName()) {
-					g.setColor(Color.BLUE);
+					g.setColor(Color.WHITE);
 					g.setFont(new Font("Verdana", Font.PLAIN, 12));
 					g.drawString(Board.rooms.get(board[i][j].getInitial()),
 							j*BoardCell.DIMENSIONS + BoardCell.DIMENSIONS/2,
@@ -69,6 +69,11 @@ public class Board extends JPanel {
 			}
 		}
 		
+		// Draw Players
+		humanPlayer.draw(g);
+		for (Player player : compPlayers) {
+			player.draw(g);
+		}
 	}
 	
 	// Default constructor

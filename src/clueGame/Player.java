@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +21,13 @@ public class Player implements Comparable<Player> {
 	public Player() {
 		myCards = new HashSet<Card>();
 		seenCards = new HashSet<Card>();
+	}
+	
+	public void draw(Graphics g) {
+		g.setColor(color);
+		g.fillOval(column*BoardCell.DIMENSIONS, row*BoardCell.DIMENSIONS, BoardCell.DIMENSIONS, BoardCell.DIMENSIONS);
+		g.setColor(Color.WHITE);
+		g.drawOval(column*BoardCell.DIMENSIONS, row*BoardCell.DIMENSIONS, BoardCell.DIMENSIONS, BoardCell.DIMENSIONS);
 	}
 	
 	public Card disproveSuggestion(Solution suggestion) {

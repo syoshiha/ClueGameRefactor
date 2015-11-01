@@ -26,16 +26,16 @@ public class BoardCell {
 		
 		// Draw appropriately colored square
 		if (isWalkway()) {
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.BLACK);
 		} else {
-			g.setColor(new Color(180, 180, 180));
+			g.setColor(new Color(80, 80, 80));
 		}
 		g.fillRect(column*DIMENSIONS, row*DIMENSIONS, DIMENSIONS, DIMENSIONS);
-		if (!isRoom()) g.setColor(Color.BLACK);
+		if (!isRoom()) g.setColor(Color.GRAY);
 		g.drawRect(column*DIMENSIONS, row*DIMENSIONS, DIMENSIONS, DIMENSIONS);
 		
 		// Draw the door
-		g.setColor(Color.BLUE);
+		g.setColor(new Color(0, 255, 0));
 		int doorWidthFactor = 6;
 		if (doorDirection == DoorDirection.UP) {
 			g.fillRect(column*DIMENSIONS, row*DIMENSIONS, DIMENSIONS, DIMENSIONS/doorWidthFactor);
