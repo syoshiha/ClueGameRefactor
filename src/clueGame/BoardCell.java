@@ -33,6 +33,19 @@ public class BoardCell {
 		g.fillRect(column*DIMENSIONS, row*DIMENSIONS, DIMENSIONS, DIMENSIONS);
 		if (!isRoom()) g.setColor(Color.BLACK);
 		g.drawRect(column*DIMENSIONS, row*DIMENSIONS, DIMENSIONS, DIMENSIONS);
+		
+		// Draw the door
+		g.setColor(Color.BLUE);
+		int doorWidthFactor = 6;
+		if (doorDirection == DoorDirection.UP) {
+			g.fillRect(column*DIMENSIONS, row*DIMENSIONS, DIMENSIONS, DIMENSIONS/doorWidthFactor);
+		} else if (doorDirection == DoorDirection.RIGHT) {
+			g.fillRect(column*DIMENSIONS + DIMENSIONS - DIMENSIONS/doorWidthFactor, row*DIMENSIONS, DIMENSIONS/doorWidthFactor, DIMENSIONS);
+		} else if (doorDirection == DoorDirection.DOWN) {
+			g.fillRect(column*DIMENSIONS, row*DIMENSIONS + DIMENSIONS - DIMENSIONS/doorWidthFactor, DIMENSIONS, DIMENSIONS/5);
+		} else if (doorDirection == DoorDirection.LEFT) {
+			g.fillRect(column*DIMENSIONS, row*DIMENSIONS, DIMENSIONS/doorWidthFactor, DIMENSIONS);
+		}
 	}
 	
 	public BoardCell(int row, int column, char initial, DoorDirection doorDirection) {
