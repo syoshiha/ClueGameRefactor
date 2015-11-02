@@ -45,35 +45,6 @@ public class Board extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		
-		// Don't draw board if it has not yet been initialized.
-		if (numRows == 0) {
-			return;
-		}
-		
-		for (int i=0; i<numRows; i++) {
-			for (int j=0; j<numColumns; j++) {
-				board[i][j].draw(g);
-			}
-		}
-		
-		// Draw text
-		for (int i=0; i<numRows; i++) {
-			for (int j=0; j<numColumns; j++) {
-				if (board[i][j].hasName()) {
-					g.setColor(Color.WHITE);
-					g.setFont(new Font("Verdana", Font.PLAIN, 12));
-					g.drawString(Board.rooms.get(board[i][j].getInitial()),
-							j*BoardCell.DIMENSIONS + BoardCell.DIMENSIONS/2,
-							i*BoardCell.DIMENSIONS + 3*BoardCell.DIMENSIONS/4);
-				}
-			}
-		}
-		
-		// Draw Players
-		humanPlayer.draw(g);
-		for (Player player : compPlayers) {
-			player.draw(g);
-		}
 	}
 	
 	// Default constructor

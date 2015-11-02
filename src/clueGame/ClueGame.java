@@ -16,6 +16,7 @@ public class ClueGame extends JFrame {
 	JPanel boardPanel;
 	private int width;
 	private int height;
+	DetectiveSheet sheet;
 	
 	// Constructor that creates the game's GUI
 	public ClueGame() {
@@ -25,6 +26,9 @@ public class ClueGame extends JFrame {
 		
 		// Set up Menu
 		setupMenu();
+		
+		// Create a detective sheet
+		sheet = new DetectiveSheet(((Board)boardPanel));
 		
 		// Set up window with the same width as the board, and more height than the board.
 		// This is so the menu can fit at the top and the control panel will fit on the
@@ -45,6 +49,7 @@ public class ClueGame extends JFrame {
 		JMenuItem detectiveSheet = new JMenuItem("Detective Sheet");
 		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(new ExitListener());
+		detectiveSheet.addActionListener(new SheetListener());
 		
 		menu.add(detectiveSheet);
 		menu.add(exit);
@@ -57,6 +62,12 @@ public class ClueGame extends JFrame {
 	private class ExitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
+		}
+	}
+	
+	private class SheetListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			sheet.setVisible(true);
 		}
 	}
 	

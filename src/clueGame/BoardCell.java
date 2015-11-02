@@ -48,6 +48,16 @@ public class BoardCell {
 		}
 	}
 	
+	public void drawName(Graphics g) {
+		if (hasName) {
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Verdana", Font.PLAIN, 12));
+			g.drawString(Board.rooms.get(initial),
+					column*BoardCell.DIMENSIONS + BoardCell.DIMENSIONS/2,
+					row*BoardCell.DIMENSIONS + 3*BoardCell.DIMENSIONS/4);
+		}
+	}
+	
 	public BoardCell(int row, int column, char initial, DoorDirection doorDirection) {
 		super();
 		this.row = row;
