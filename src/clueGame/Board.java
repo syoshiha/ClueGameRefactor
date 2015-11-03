@@ -45,10 +45,14 @@ public class Board extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		// Check that board has been initialized before drawing it
-		
+		if (numRows == 0) return;
 		
 		// Draw cells
-		
+		for (int i=0; i<numRows; i++) {
+			for (int j=0; j<numColumns; j++) {
+				board[i][j].draw(g);
+			}
+		}
 		
 		// Draw Players
 		
