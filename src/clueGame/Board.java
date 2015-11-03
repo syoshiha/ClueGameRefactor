@@ -64,7 +64,6 @@ public class Board extends JPanel {
 		}
 		
 		// Draw Labels
-		
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
 				board[i][j].drawName(g);
