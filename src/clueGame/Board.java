@@ -44,6 +44,17 @@ public class Board extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		// Check that board has been initialized before drawing it
+		
+		
+		// Draw cells
+		
+		
+		// Draw Players
+		
+		
+		// Draw Labels
+		
 		
 	}
 	
