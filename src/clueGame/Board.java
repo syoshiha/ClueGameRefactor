@@ -58,7 +58,10 @@ public class Board extends JPanel {
 		}
 		
 		// Draw Players
-		
+		humanPlayer.draw(g);
+		for (ComputerPlayer player : compPlayers) {
+			player.draw(g);
+		}
 		
 		// Draw Labels
 		
