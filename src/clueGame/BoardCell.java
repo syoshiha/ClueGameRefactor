@@ -13,20 +13,25 @@ public class BoardCell {
 	private char initial;
 	private DoorDirection doorDirection;
 	private boolean hasName;
-	
+	private boolean highlight = false;
+
 	public static final int DIMENSIONS = 30;
 	public static final char WALKWAY_INITIAL = 'W';
 	//public static final char CLOSET_INITIAL = 'X';
 	
 	public BoardCell() {
 		super();
+		
 	}
 	
 	public void draw(Graphics g) {
 		
 		// Draw appropriately colored square
 		if (isWalkway()) {
-			g.setColor(Color.BLACK);
+			if(!highlight)
+				g.setColor(Color.BLACK);
+			else
+				g.setColor(new Color(0,255,230));
 		} else {
 			g.setColor(new Color(80, 80, 80));
 		}
@@ -46,6 +51,11 @@ public class BoardCell {
 		} else if (doorDirection == DoorDirection.LEFT) {
 			g.fillRect(column*DIMENSIONS, row*DIMENSIONS, DIMENSIONS/doorWidthFactor, DIMENSIONS);
 		}
+	}
+			
+	
+	public void highlight(boolean b){
+		highlight = b;
 	}
 	
 	public void drawName(Graphics g) {
@@ -106,7 +116,12 @@ public class BoardCell {
 	public void setName(boolean hasName) {
 		this.hasName = hasName;
 	}
-	
+	public boolean equals(int r, int c){
+		if(this.row == r && this.column==c)
+			return true;
+		else
+			return false;
+	}
 	public boolean hasName() {
 		return hasName;
 	}

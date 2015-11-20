@@ -37,7 +37,8 @@ public class Board extends JPanel {
 	private Map<BoardCell, LinkedList<BoardCell>> adjMatrix;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
-
+	private Set<BoardCell> visited2;
+	private Set<BoardCell> targets2;
 	private Solution theAnswer;
 	private Set<Card> answerCards; // Set of cards in the solution. This
 								   // variable is mostly useful for testing.
@@ -53,6 +54,7 @@ public class Board extends JPanel {
 		// Draw cells
 		for (int i=0; i<numRows; i++) {
 			for (int j=0; j<numColumns; j++) {
+				
 				board[i][j].draw(g);
 			}
 		}
@@ -69,6 +71,8 @@ public class Board extends JPanel {
 				board[i][j].drawName(g);
 			}
 		}
+		
+
 	}
 	
 	// Default constructor
@@ -221,6 +225,8 @@ public class Board extends JPanel {
 		if (accusation == null) return false;
 		return this.theAnswer.equals(accusation);
 	}
+	
+
 	
 	public void loadPeopleConfig() throws FileNotFoundException, BadConfigFormatException {
 		FileReader reader = new FileReader(peopleConfigFile);
@@ -520,26 +526,64 @@ public class Board extends JPanel {
 		visited.add(board[row][column]);
 		targets = findAllTargets(board[row][column], pathLength);
 	}
+	public Set<BoardCell> returnTargets(int row, int column, int pathLength){
+		visited = new HashSet<BoardCell>(); //should we set these up here? might be ineff.
+		targets = new HashSet<BoardCell>();
+		visited.clear(); //clear the visited set
+		targets.clear(); //clear the targets set
+		visited.add(board[row][column]);
+		return findAllTargets(board[row][column], pathLength);
+	}
+	
+	public void highlight( int row, int column, int pathLength){
+		visited2 = new HashSet<BoardCell>(); //should we set these up here? might be ineff.
+		targets2 = new HashSet<BoardCell>();
+		visited2.clear(); //clear the visited set
+		targets2.clear(); //clear the targets set
+		visited2.add(board[row][column]);
+		targets2 = findAllTargets(board[row][column], pathLength);
+		
+		for(BoardCell b: targets2){
+			board[b.getRow()][b.getCol()].highlight(true);
+			this.repaint();
+		}
+	}
+	public void unHighlight(){
+		for(BoardCell b: targets2){
+			board[b.getRow()][b.getCol()].highlight(false);
+			this.repaint();
+		}
+		targets2.clear();
+		visited2.clear();
+	}
+	
+	public boolean validMove(int row, int col){
+		for(BoardCell b: targets2){
+			if(b.equals(row, col))
+				return true;
+		}
+		return false;
+	}
 	
 	private Set<BoardCell> findAllTargets(BoardCell currentCell, int remainingSteps) {
-		visited.add(currentCell);
+		visited2.add(currentCell);
 		LinkedList<BoardCell> adj = new LinkedList<BoardCell>(adjMatrix.get(currentCell));	//new linked list of cells that have not been visited
-		for (BoardCell i:visited){
+		for (BoardCell i:visited2){
 			adj.remove(i);
 		}
 		for (BoardCell i:adj){
 			if(remainingSteps == 1){
-				targets.add(i);
+				targets2.add(i);
 			}
 			else if (i.isDoorway()){
-				targets.add(i);
+				targets2.add(i);
 			}
 			else {
-				targets.addAll(findAllTargets(i, remainingSteps-1));
+				targets2.addAll(findAllTargets(i, remainingSteps-1));
 			}
-			visited.remove(i);
+			visited2.remove(i);
 		}
-		return targets;
+		return targets2;
 	}
 
 	public BoardCell getCellAt(int row, int column){

@@ -7,8 +7,13 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player {
 	
-	char lastRoomChosen;
-	
+	ArrayList<Character> lastRoomChosen ;
+	public ComputerPlayer() {
+		super();
+		lastRoomChosen = new ArrayList<Character>();
+	}
+
+
 	// This function simply selects a target and keeps track of the last
 	// room chosen. it does not actually MOVE the player to the chosen
 	// location.
@@ -16,8 +21,8 @@ public class ComputerPlayer extends Player {
 
 		// Look for room targets
 		for (BoardCell cell : targets) {
-			if (cell.isRoom() && cell.getInitial() != lastRoomChosen) {
-				lastRoomChosen = cell.getInitial();
+			if (cell.isRoom() &&  !lastRoomChosen.contains(cell.getInitial())) {
+				lastRoomChosen.add(cell.getInitial());
 				return cell;
 			}
 		}
@@ -105,8 +110,6 @@ public class ComputerPlayer extends Player {
 		return suggestion;
 	}
 	
-	public ComputerPlayer() {
-		super();
-	}
+
  
 }
