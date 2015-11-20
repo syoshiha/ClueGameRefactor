@@ -31,7 +31,7 @@ public class BoardCell {
 			if(!highlight)
 				g.setColor(Color.BLACK);
 			else
-				g.setColor(new Color(0,255,230));
+				g.setColor(new Color(0,255,150));
 		} else {
 			g.setColor(new Color(80, 80, 80));
 		}
